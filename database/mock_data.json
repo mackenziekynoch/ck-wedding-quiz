@@ -1,0 +1,22 @@
+{
+  "quiz": [
+    {
+      "question": "What year was Cole born?",
+      "answerOptions": [
+        {"id": 1, "text": "1990"},
+        {"id": 2, "text": "1994"},
+        {"id": 3, "text": "1997"},
+        {"id": 4, "text": "2000"}
+      ]
+    },
+    {
+      "question": "When did Cole and Kelly meet?",
+      "answerOptions": [
+        {"id": 1, "text": "In middle school"},
+        {"id": 2, "text": "In high school"},
+        {"id": 3, "text": "In college"},
+        {"id": 4, "text": "After college"}
+      ]
+    }
+  ]
+}
