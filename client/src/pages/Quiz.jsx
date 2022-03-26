@@ -10,6 +10,7 @@ import Typography from '@mui/material/Typography';
 import QuizPage from "../components/QuizPage.jsx";
 import QuizHeader from "../components/QuizHeader.jsx";
 import QuizLeaderboard from '../components/QuizLeaderboard.jsx';
+import QuizAlert from '../components/QuizAlert.jsx';
 
 import data from "../../../database/mock_leaders.json";
 
@@ -17,17 +18,25 @@ import data from "../../../database/mock_leaders.json";
 export default function Quiz({quiz}) {
   const steps = [...Array(quiz.length).keys()];
   const [activeStep, setActiveStep] = React.useState(0);
+  const [status, setStatus] = React.useState(null);
 
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    setStatus(null);
   };
 
   const handleBack = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
+    setStatus(null);
   };
 
   const handleReset = () => {
     setActiveStep(0);
+    setStatus(null);
+  };
+
+  const handleAnswer = (isCorrect) => {
+    setStatus(isCorrect);
   };
 
   return (
@@ -43,6 +52,11 @@ export default function Quiz({quiz}) {
             );
           })}
         </Stepper>
+        { status !== null &&
+          <Box mt={2}>
+            <QuizAlert status={status} />
+          </Box>
+        }
         {activeStep === steps.length ? (
           <React.Fragment>
             <Box sx={{width: '100%'}}>
@@ -59,19 +73,18 @@ export default function Quiz({quiz}) {
         ) : (
           <React.Fragment>
             <QuizPage
-              question={quiz[activeStep].question}
-              answerOptions={quiz[activeStep].answerOptions}
-              handleNext={handleNext}>
+              question={quiz[activeStep]}
+              handleAnswer={handleAnswer}>
             </QuizPage>
             <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
-              <Button
+              {/* <Button
                 color="inherit"
                 disabled={activeStep === 0}
                 onClick={handleBack}
                 sx={{ mr: 1 }}
               >
                 Back
-              </Button>
+              </Button> */}
               <Box sx={{ flex: '1 1 auto' }} />
               <Button onClick={handleNext}>
                 {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
