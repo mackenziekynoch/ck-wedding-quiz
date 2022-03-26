@@ -112,12 +112,6 @@ export default function QuizLeaderboard({rows}) {
               count={rows.length}
               rowsPerPage={rowsPerPage}
               page={page}
-              // SelectProps={{
-              //   inputProps: {
-              //     'aria-label': 'rows per page',
-              //   },
-              //   native: true,
-              // }}
               onPageChange={handleChangePage}
               ActionsComponent={TablePaginationActions}
             />

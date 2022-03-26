@@ -1,4 +1,5 @@
 import * as React from 'react';
+
 import Box from '@mui/material/Box';
 import Stepper from '@mui/material/Stepper';
 import Step from '@mui/material/Step';
@@ -34,12 +35,10 @@ export default function Quiz({quiz}) {
       <QuizHeader />
       <Box sx={{ width: '100%' }}>
         <Stepper activeStep={activeStep}>
-          {steps.map((label) => {
-            const stepProps = {};
-            const labelProps = {};
+          {steps.map(label => {
             return (
-              <Step key={label} {...stepProps}>
-                <StepLabel {...labelProps}></StepLabel>
+              <Step key={label}>
+                <StepLabel></StepLabel>
               </Step>
             );
           })}
@@ -48,7 +47,7 @@ export default function Quiz({quiz}) {
           <React.Fragment>
             <Box sx={{width: '100%'}}>
               <Typography sx={{ mt: 2, mb: 1 }}>
-                Quiz completed! {/* TODO: add leaderboard here */}
+                Quiz completed!
               </Typography>
               <QuizLeaderboard rows={data.rows} />
             </Box>
@@ -59,7 +58,11 @@ export default function Quiz({quiz}) {
           </React.Fragment>
         ) : (
           <React.Fragment>
-            <QuizPage question={quiz[activeStep].question} answerOptions={quiz[activeStep].answerOptions} handleNext={handleNext}></QuizPage>
+            <QuizPage
+              question={quiz[activeStep].question}
+              answerOptions={quiz[activeStep].answerOptions}
+              handleNext={handleNext}>
+            </QuizPage>
             <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
               <Button
                 color="inherit"
