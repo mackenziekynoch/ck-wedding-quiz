@@ -1,8 +1,11 @@
 import React from "react";
+import Quiz from "./pages/Quiz.jsx";
+
+import data from "../../database/mock_data.json";
 
 const App = (props) => {
   return (
-    <h1> Hello World! </h1>
+    <Quiz quiz={data.quiz} />
   );
 };
 
