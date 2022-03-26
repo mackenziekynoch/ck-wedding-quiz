@@ -8,6 +8,9 @@ import Typography from '@mui/material/Typography';
 
 import QuizPage from "../components/QuizPage.jsx";
 import QuizHeader from "../components/QuizHeader.jsx";
+import QuizLeaderboard from '../components/QuizLeaderboard.jsx';
+
+import data from "../../../database/mock_leaders.json";
 
 
 export default function Quiz({quiz}) {
@@ -36,16 +39,19 @@ export default function Quiz({quiz}) {
             const labelProps = {};
             return (
               <Step key={label} {...stepProps}>
-                <StepLabel {...labelProps}>{label}</StepLabel>
+                <StepLabel {...labelProps}></StepLabel>
               </Step>
             );
           })}
         </Stepper>
         {activeStep === steps.length ? (
           <React.Fragment>
-            <Typography sx={{ mt: 2, mb: 1 }}>
-              All steps completed - you&apos;re finished {/* TODO: add leaderboard here */}
-            </Typography>
+            <Box sx={{width: '100%'}}>
+              <Typography sx={{ mt: 2, mb: 1 }}>
+                Quiz completed! {/* TODO: add leaderboard here */}
+              </Typography>
+              <QuizLeaderboard rows={data.rows} />
+            </Box>
             <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
               <Box sx={{ flex: '1 1 auto' }} />
               <Button onClick={handleReset}>Reset</Button>

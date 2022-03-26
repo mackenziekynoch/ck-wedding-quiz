@@ -17,6 +17,15 @@
         {"id": 3, "text": "In college"},
         {"id": 4, "text": "After college"}
       ]
+    },
+    {
+      "question": "Where did Cole propose to Kelly?",
+      "answerOptions": [
+        {"id": 1, "text": "In their living roome"},
+        {"id": 2, "text": "At the Washington Monument"},
+        {"id": 3, "text": "At Elon"},
+        {"id": 4, "text": "At Kelly's school"}
+      ]
     }
   ]
 }
