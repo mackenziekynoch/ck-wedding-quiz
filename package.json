@@ -14,14 +14,17 @@
     "@mui/icons-material": "^5.5.1",
     "@mui/material": "^5.5.2",
     "react": "^17.0.2",
+    "react-device-preview": "^1.0.6",
     "react-dom": "^17.0.2"
   },
   "devDependencies": {
-    "html-webpack-plugin": "^5.5.0",
     "@babel/core": "^7.17.0",
     "@babel/preset-env": "^7.16.11",
     "@babel/preset-react": "^7.16.7",
     "babel-loader": "^8.2.3",
+    "css-loader": "^6.7.1",
+    "html-webpack-plugin": "^5.5.0",
+    "style-loader": "^3.3.1",
     "webpack": "^5.68.0",
     "webpack-cli": "^4.9.2"
   }
