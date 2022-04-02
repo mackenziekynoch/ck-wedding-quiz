@@ -7,6 +7,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
 import ManageQuizFrame from './ManageQuizFrame.jsx';
+import ManageQuestions from './ManageQuestions.jsx';
 
 
 const TabPanel = (props) => {
@@ -23,7 +24,6 @@ const TabPanel = (props) => {
       {value === index && (
         <Box sx={{ p: 3, width: '100%' }}>
           {children}
-          {/* <Typography>{children}</Typography> */}
         </Box>
       )}
     </div>
@@ -46,7 +46,7 @@ export default function ManageQuiz() {
 
   return (
     <Box
-      sx={{ flexGrow: 1, bgcolor: 'background.paper', display: 'flex', height: 224, flexDirection: 'row' }}
+      sx={{ flexGrow: 1, bgcolor: 'background.paper', display: 'flex', height: 224}}
     >
       <Tabs value={value} onChange={handleChange} aria-label="page navigation" orientation="vertical" >
         <Tab label="Quiz Questions" {...a11yProps(0)} />
@@ -54,7 +54,8 @@ export default function ManageQuiz() {
         <Tab label="Event Details" {...a11yProps(2)} />
       </Tabs>
       <TabPanel value={value} index={0}>
-        <Box sx={{ alignSelf: 'flex-end' }}>
+        <Box sx={{ display: 'flex', flexDirection: 'row' }}>
+          <ManageQuestions />
           <ManageQuizFrame />
         </Box>
       </TabPanel>
