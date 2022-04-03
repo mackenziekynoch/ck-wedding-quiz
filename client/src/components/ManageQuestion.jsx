@@ -1,13 +1,27 @@
 import * as React from 'react';
+import _ from 'lodash';
+import { useDispatch } from 'react-redux';
+import { updateQuestion } from '../redux/store.js';
 import TextField from '@mui/material/TextField';
 
 import QuestionOption from './QuestionOption.jsx';
 
 export default function ManageQuestion({quizQuestion}) {
+  const dispatch = useDispatch();
   const [question, setQuestion] = React.useState(quizQuestion.question);
   const [description, setDescription] = React.useState(quizQuestion.description);
-  const [optionId, setOptionId] = React.useState(1);
+  const [optionId, setOptionId] = React.useState(quizQuestion.answerOptions.length);
   const [options, setOptions] = React.useState(quizQuestion.answerOptions);
+
+  React.useEffect(() => {
+    dispatch(updateQuestion({
+      id: quizQuestion.id,
+      question: question,
+      description: description,
+      answerOptions: options,
+      answer: quizQuestion.answer
+    }));
+  }, [options, question, description]);
 
   const addQuestionOption = (event) => {
     const options_copy = options.slice();
@@ -29,7 +43,7 @@ export default function ManageQuestion({quizQuestion}) {
   };
 
   const updateQuestionOption = (event) => {
-    let options_copy = options.slice();
+    let options_copy = _.cloneDeep(options);
     const order = event.target.id.split('-')[2];
     options_copy[order].text = event.target.value;
     setOptions(options_copy);

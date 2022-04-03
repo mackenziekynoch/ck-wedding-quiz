@@ -1,7 +1,8 @@
 import * as React from 'react';
 import _ from 'lodash';
+import { useSelector, useDispatch } from 'react-redux';
+import { addQuestion, removeQuestion } from '../redux/store.js';
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
 import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
@@ -23,15 +24,14 @@ const defaultQuestion = {
 };
 
 export default function ManageQuestions(props) {
-  const [questions, setQuestions] = React.useState(props.questions ? props.questions : [_.cloneDeep(defaultQuestion)]);
-  const [questionId, setQuestionId] = React.useState(props.questions ? props.questions.length : 1)
+  const questions = useSelector(state => state.quiz.quiz);
+  const dispatch = useDispatch();
+  const [questionId, setQuestionId] = React.useState(questions.length);
 
   const addDefaultQuestion = () => {
     const newQuestion = _.cloneDeep(defaultQuestion);
     newQuestion.id = `question-${questionId}`;
-    const questionsCopy = _.cloneDeep(questions);
-    questionsCopy.push(newQuestion);
-    setQuestions(questionsCopy);
+    dispatch(addQuestion(newQuestion));
     setQuestionId(questionId + 1);
   };
 
@@ -40,16 +40,12 @@ export default function ManageQuestions(props) {
     if (questions.length === 1) {
       return;
     }
-    const idStr = e.target.parentElement.id.split('-')[2];
-    if (idStr === undefined || idStr === null) {
+    const idArr = e.target.parentElement.id.split('-');
+    if (idArr === undefined || idArr.length !== 3) {
       return;
     }
-    let questionsCopy = _.cloneDeep(questions);
-    const id = parseInt(idStr, 10);
-    if (!isNaN(id)) {
-      questionsCopy.splice(id, 1);
-      setQuestions(questionsCopy);
-    }
+    const idStr = `${idArr[1]}-${idArr[2]}`;
+    dispatch(removeQuestion({id: idStr}))
   };
 
   return (
@@ -64,8 +60,8 @@ export default function ManageQuestions(props) {
         noValidate
         autoComplete="off"
       >
-        {questions.map((question, i) => (
-          <React.Fragment key={question.id}>
+        {Object.entries(questions).map((entry, i) => (
+          <React.Fragment key={entry[0]}>
             <Accordion>
               <AccordionSummary
                 expandIcon={<ExpandMoreIcon />}
@@ -75,11 +71,11 @@ export default function ManageQuestions(props) {
               >
                 <Typography sx={{ display: 'flex', order: 0, marginRight: '80%' }}>{`Question ${i+1}`}</Typography>
                 {questions.length > 1 &&
-                  <ClearRoundedIcon onClick={handleRemoveQuestion} color='error' id={`remove-${question.id}`} sx={{ display: 'flex', order: 1 }}/>
+                  <ClearRoundedIcon onClick={handleRemoveQuestion} color='error' id={`remove-${entry[0]}`} sx={{ display: 'flex', order: 1 }}/>
                 }
               </AccordionSummary>
               <AccordionDetails>
-                <ManageQuestion quizQuestion={question} />
+                <ManageQuestion quizQuestion={entry[1]} />
               </AccordionDetails>
             </Accordion>
           </React.Fragment>

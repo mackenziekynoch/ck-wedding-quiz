@@ -73,7 +73,7 @@ export default function Quiz({quiz, editMode}) {
         ) : (
           <React.Fragment>
             <QuizPage
-              question={quiz[activeStep]}
+              question={quiz[`question-${activeStep}`]}
               handleAnswer={handleAnswer}>
             </QuizPage>
             <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>

@@ -3,8 +3,6 @@ import * as React from 'react';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
 
 import ManageQuiz from '../components/ManageQuiz.jsx';
 
@@ -53,7 +51,7 @@ export default function Manage(props) {
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}>
-        <ManageQuiz questions={props.questions} />
+        <ManageQuiz />
       </TabPanel>
       <TabPanel value={value} index={1}>
         Item Two

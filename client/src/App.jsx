@@ -1,14 +1,15 @@
 import React from "react";
 import Quiz from "./pages/Quiz.jsx";
 import Manage from "./pages/Manage.jsx";
-
-import data from "../../database/mock_data.json";
-
+import store from './redux/store.js';
+import { Provider } from "react-redux";
 
 const App = (props) => {
   return (
     // <Quiz quiz={data.quiz} />
-    <Manage questions={data.quiz}/>
+    <Provider store={store}>
+      <Manage />
+    </Provider>
   );
 };
 

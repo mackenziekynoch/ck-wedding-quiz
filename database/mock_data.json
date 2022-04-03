@@ -1,6 +1,6 @@
 {
-  "quiz": [
-    {
+  "quiz": {
+    "question-0": {
       "id": "question-0",
       "question": "What year was Cole born?",
       "answerOptions": [
@@ -12,7 +12,7 @@
       "answer": 2,
       "description": "Cole was born on September 9, 1994, and the world quaked with his entry, obviously."
     },
-    {
+    "question-1": {
       "id": "question-1",
       "question": "When did Cole and Kelly meet?",
       "answerOptions": [
@@ -24,7 +24,7 @@
       "answer": 2,
       "description": "Cole and Kelly started dating in their junior year of high school, following months of Cole pining over Kelly on Facebook. Feel free to dive into his Facebook history to bear witness."
     },
-    {
+    "question-2": {
       "id": "question-2",
       "question": "Where did Cole propose to Kelly?",
       "answerOptions": [
@@ -36,5 +36,5 @@
       "answer": 1,
       "description": "The couple went to someplace, but Cole ended up getting on one knee in their living room!"
     }
-  ]
+  }
 }
