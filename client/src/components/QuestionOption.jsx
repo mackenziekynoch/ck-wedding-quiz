@@ -6,7 +6,7 @@ import RemoveCircleOutlineRoundedIcon from '@mui/icons-material/RemoveCircleOutl
 import AddCircleOutlineRoundedIcon from '@mui/icons-material/AddCircleOutlineRounded';
 
 export default function QuestionOption(props) {
-  const { id, includeAddButton, includeRemoveButton , addQuestionOption, removeQuestionOption, updateQuestionOption } = props
+  const { id, value, includeAddButton, includeRemoveButton , addQuestionOption, removeQuestionOption, updateQuestionOption } = props
   return (
     <div>
       <TextField
@@ -15,6 +15,7 @@ export default function QuestionOption(props) {
         label={`Answer option ${id + 1}`}
         sx={{width: '50ch'}}
         onChange={updateQuestionOption}
+        defaultValue={value}
       />
       { includeRemoveButton &&
         <IconButton aria-label="delete-option" onClick={removeQuestionOption} id={id}>

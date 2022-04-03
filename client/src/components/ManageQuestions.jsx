@@ -18,11 +18,11 @@ const defaultQuestion = {
     {id: 0, text: "option"},
   ],
   answer: 0,
-  description: "Add description here"
+  description: "add description here"
 };
 
-export default function ManageQuestions() {
-  const [questions, setQuestions] = React.useState([_.cloneDeep(defaultQuestion)]);
+export default function ManageQuestions(props) {
+  const [questions, setQuestions] = React.useState(props.questions ? props.questions : [_.cloneDeep(defaultQuestion)]);
 
   const addDefaultQuestion = () => {
     const newQuestion = _.cloneDeep(defaultQuestion);
@@ -69,7 +69,7 @@ export default function ManageQuestions() {
                 }
               </AccordionSummary>
               <AccordionDetails>
-                <ManageQuestion />
+                <ManageQuestion quizQuestion={question} />
               </AccordionDetails>
             </Accordion>
           </React.Fragment>

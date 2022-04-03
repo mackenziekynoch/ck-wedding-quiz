@@ -37,7 +37,7 @@ function a11yProps(index) {
   };
 }
 
-export default function ManageQuiz() {
+export default function ManageQuiz(props) {
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
@@ -55,8 +55,8 @@ export default function ManageQuiz() {
       </Tabs>
       <TabPanel value={value} index={0}>
         <Box sx={{ display: 'flex', flexDirection: 'row' }}>
-          <ManageQuestions />
-          <ManageQuizFrame />
+          <ManageQuestions questions={props.questions} />
+          <ManageQuizFrame questions={props.questions} />
         </Box>
       </TabPanel>
       <TabPanel value={value} index={1}>

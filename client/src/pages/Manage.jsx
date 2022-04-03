@@ -36,7 +36,7 @@ function a11yProps(index) {
   };
 }
 
-export default function Manage() {
+export default function Manage(props) {
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
@@ -53,7 +53,7 @@ export default function Manage() {
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}>
-        <ManageQuiz />
+        <ManageQuiz questions={props.questions} />
       </TabPanel>
       <TabPanel value={value} index={1}>
         Item Two

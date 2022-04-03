@@ -3,11 +3,11 @@ import TextField from '@mui/material/TextField';
 
 import QuestionOption from './QuestionOption.jsx';
 
-export default function ManageQuestion() {
-  const [question, setQuestion] = React.useState();
-  const [description, setDescription] = React.useState();
+export default function ManageQuestion({quizQuestion}) {
+  const [question, setQuestion] = React.useState(quizQuestion.question);
+  const [description, setDescription] = React.useState(quizQuestion.description);
   const [optionId, setOptionId] = React.useState(1);
-  const [options, setOptions] = React.useState([{id: 0, text: 'placeholder'}]);
+  const [options, setOptions] = React.useState(quizQuestion.answerOptions);
 
   const addQuestionOption = (event) => {
     const options_copy = options.slice();
@@ -51,6 +51,7 @@ export default function ManageQuestion() {
         id="question-field"
         label="Question"
         onChange={handleSetQuestion}
+        defaultValue={question}
       />
       <TextField
         required
@@ -60,6 +61,7 @@ export default function ManageQuestion() {
         label="Description"
         helperText="Description/answer to show after respondent makes selection"
         onChange={handleSetDescription}
+        defaultValue={description}
       />
       {options.map((option, i) => (
         <QuestionOption
@@ -70,6 +72,7 @@ export default function ManageQuestion() {
           removeQuestionOption={removeQuestionOption}
           addQuestionOption={addQuestionOption}
           updateQuestionOption={updateQuestionOption}
+          value={option.text}
         />
       ))}
     </div>

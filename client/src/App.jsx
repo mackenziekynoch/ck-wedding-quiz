@@ -8,7 +8,7 @@ import data from "../../database/mock_data.json";
 const App = (props) => {
   return (
     // <Quiz quiz={data.quiz} />
-    <Manage />
+    <Manage questions={data.quiz}/>
   );
 };
 
