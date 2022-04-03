@@ -22,7 +22,7 @@ const QuizPage = ({question, handleAnswer}) => {
   return (
     <React.Fragment>
       <Box sx={{ width: '100%' }}>
-        <h3>{question.question}</h3>
+        <h3 style={{ marginLeft: 10, marginRight: 10 }}>{question.question}</h3>
         <Stack spacing={1} alignItems="stretch" justifyContent="flex-start">
           {question.answerOptions.map(option => {
             if (active) {
@@ -33,7 +33,7 @@ const QuizPage = ({question, handleAnswer}) => {
           })}
         </Stack>
         { showDescription &&
-          <Typography sx={{ mt: 2, mb: 1 }}>{question.description}</Typography>
+          <Typography sx={{ mt: 2, mb: 1, ml: 1, mr: 1 }}>{question.description}</Typography>
         }
       </Box>
     </React.Fragment>
