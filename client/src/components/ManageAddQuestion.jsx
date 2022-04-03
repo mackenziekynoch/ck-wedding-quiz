@@ -5,15 +5,15 @@ import SpeedDialIcon from '@mui/material/SpeedDialIcon';
 import SpeedDialAction from '@mui/material/SpeedDialAction';
 import DynamicFormRoundedIcon from '@mui/icons-material/DynamicFormRounded';
 import CachedRoundedIcon from '@mui/icons-material/CachedRounded';
+import ClearRoundedIcon from '@mui/icons-material/ClearRounded';
 
-const actions = [
-  { icon: <DynamicFormRoundedIcon />, name: 'Add Question' },
-  { icon: <CachedRoundedIcon />, name: 'Reorder' },
-];
-
-export default function ManageAddQuestion() {
+export default function ManageAddQuestion(props) {
+  const actions = [
+    { icon: <DynamicFormRoundedIcon />, name: 'Add Question', action: props.addQuestion },
+    { icon: <CachedRoundedIcon />, name: 'Reorder' },
+  ];
   return (
-    <Box sx={{ height: 320, transform: 'translateZ(0px)', flexGrow: 1 }}>
+    <Box sx={{ height: 300, transform: 'translateZ(0px)', flexGrow: 1 }}>
       <SpeedDial
         ariaLabel="add item menu"
         sx={{ position: 'absolute', bottom: 16, right: 16 }}
@@ -24,6 +24,7 @@ export default function ManageAddQuestion() {
             key={action.name}
             icon={action.icon}
             tooltipTitle={action.name}
+            onClick={action.action}
           />
         ))}
       </SpeedDial>

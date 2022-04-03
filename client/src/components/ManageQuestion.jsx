@@ -7,11 +7,11 @@ export default function ManageQuestion() {
   const [question, setQuestion] = React.useState();
   const [description, setDescription] = React.useState();
   const [optionId, setOptionId] = React.useState(1);
-  const [options, setOptions] = React.useState([{id: 0, value: 'placeholder'}]);
+  const [options, setOptions] = React.useState([{id: 0, text: 'placeholder'}]);
 
   const addQuestionOption = (event) => {
     const options_copy = options.slice();
-    options_copy.push({id: optionId, value: 'placeholder'});
+    options_copy.push({id: optionId, text: 'placeholder'});
     setOptions(options_copy);
     setOptionId(optionId + 1);
   };
@@ -31,7 +31,7 @@ export default function ManageQuestion() {
   const updateQuestionOption = (event) => {
     let options_copy = options.slice();
     const order = event.target.id.split('-')[2];
-    options_copy[order].value = event.target.value;
+    options_copy[order].text = event.target.value;
     setOptions(options_copy);
   };
 
