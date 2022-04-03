@@ -13,7 +13,7 @@ import ManageQuestion from './ManageQuestion.jsx';
 import ManageAddQuestion from './ManageAddQuestion.jsx';
 
 const defaultQuestion = {
-  id: "question-0",
+  id: "question-default",
   question: "add question here",
   answerOptions: [
     {id: 0, text: "option"},
@@ -24,12 +24,15 @@ const defaultQuestion = {
 
 export default function ManageQuestions(props) {
   const [questions, setQuestions] = React.useState(props.questions ? props.questions : [_.cloneDeep(defaultQuestion)]);
+  const [questionId, setQuestionId] = React.useState(props.questions ? props.questions.length : 1)
 
   const addDefaultQuestion = () => {
     const newQuestion = _.cloneDeep(defaultQuestion);
+    newQuestion.id = `question-${questionId}`;
     const questionsCopy = _.cloneDeep(questions);
     questionsCopy.push(newQuestion);
     setQuestions(questionsCopy);
+    setQuestionId(questionId + 1);
   };
 
   const handleRemoveQuestion = (e) => {
@@ -37,10 +40,16 @@ export default function ManageQuestions(props) {
     if (questions.length === 1) {
       return;
     }
-    const id = e.target.parentElement.id.slice('-')[2];
+    const idStr = e.target.parentElement.id.split('-')[2];
+    if (idStr === undefined || idStr === null) {
+      return;
+    }
     let questionsCopy = _.cloneDeep(questions);
-    questionsCopy.splice(id, 1);
-    setQuestions(questionsCopy);
+    const id = parseInt(idStr, 10);
+    if (!isNaN(id)) {
+      questionsCopy.splice(id, 1);
+      setQuestions(questionsCopy);
+    }
   };
 
   return (
@@ -66,7 +75,7 @@ export default function ManageQuestions(props) {
               >
                 <Typography sx={{ display: 'flex', order: 0, marginRight: '80%' }}>{`Question ${i+1}`}</Typography>
                 {questions.length > 1 &&
-                  <ClearRoundedIcon onClick={handleRemoveQuestion} color='error' id={`remove-question-${i}`} sx={{ display: 'flex', order: 1 }}/>
+                  <ClearRoundedIcon onClick={handleRemoveQuestion} color='error' id={`remove-${question.id}`} sx={{ display: 'flex', order: 1 }}/>
                 }
               </AccordionSummary>
               <AccordionDetails>
