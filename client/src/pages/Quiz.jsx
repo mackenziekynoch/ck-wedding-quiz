@@ -60,7 +60,7 @@ export default function Quiz({quiz, editMode}) {
         {activeStep === steps.length ? (
           <React.Fragment>
             <Box sx={{width: '100%'}}>
-              <Typography sx={{ mt: 2, mb: 1 }}>
+              <Typography sx={{ mt: 2, mb: 1, ml: 1 }}>
                 Quiz completed!
               </Typography>
               <QuizLeaderboard rows={data.rows} />
