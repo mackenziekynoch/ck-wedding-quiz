@@ -16,7 +16,7 @@ import data from "../../../database/mock_leaders.json";
 
 
 export default function Quiz({quiz, editMode}) {
-  const steps = [...Array(quiz.length).keys()];
+  const steps = [...Array(Object.entries(quiz).length).keys()];
   const [activeStep, setActiveStep] = React.useState(0);
   const [status, setStatus] = React.useState(null);
 

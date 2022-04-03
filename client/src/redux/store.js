@@ -8,7 +8,6 @@ const quizSlice = createSlice({
   },
   reducers: {
     updateQuestion: (state, action) => {
-      console.log('reducer updateQuestion: ', action.payload)
       state.quiz[action.payload.id] = action.payload;
     },
     addQuestion: (state, action) => {
