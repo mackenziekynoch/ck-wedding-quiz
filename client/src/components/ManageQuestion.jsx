@@ -12,6 +12,7 @@ export default function ManageQuestion({quizQuestion}) {
   const [description, setDescription] = React.useState(quizQuestion.description);
   const [optionId, setOptionId] = React.useState(quizQuestion.answerOptions.length);
   const [options, setOptions] = React.useState(quizQuestion.answerOptions);
+  const [answer, setAnswer] = React.useState(quizQuestion.answer);
 
   React.useEffect(() => {
     dispatch(updateQuestion({
@@ -19,9 +20,9 @@ export default function ManageQuestion({quizQuestion}) {
       question: question,
       description: description,
       answerOptions: options,
-      answer: quizQuestion.answer
+      answer: answer
     }));
-  }, [options, question, description]);
+  }, [options, question, description, answer]);
 
   const addQuestionOption = (event) => {
     const options_copy = options.slice();
@@ -47,6 +48,13 @@ export default function ManageQuestion({quizQuestion}) {
     const order = event.target.id.split('-')[2];
     options_copy[order].text = event.target.value;
     setOptions(options_copy);
+  };
+
+  const updateQuestionAnswer = (event) => {
+    const id = parseInt(event.target.parentElement.id, 10);
+    if (id !== undefined && id !== null && !isNaN(id)) {
+      setAnswer(id + 1);
+    }
   };
 
   const handleSetQuestion = (event) => {
@@ -81,11 +89,13 @@ export default function ManageQuestion({quizQuestion}) {
         <QuestionOption
           id={i}
           key={option.id}
+          isAnswer={option.id === answer}
           includeAddButton={options.length - 1 === i ? true : false}
           includeRemoveButton={i === 0 && options.length === 1 ? false : true}
           removeQuestionOption={removeQuestionOption}
           addQuestionOption={addQuestionOption}
           updateQuestionOption={updateQuestionOption}
+          updateQuestionAnswer={updateQuestionAnswer}
           value={option.text}
         />
       ))}
