@@ -70,7 +70,7 @@ export default function ManageQuestions(props) {
                 sx={{ display: 'flex', flexGrow: 1}}
               >
                 <Typography sx={{ display: 'flex', order: 0, marginRight: '80%' }}>{`Question ${i+1}`}</Typography>
-                {questions.length > 1 &&
+                {Object.entries(questions).length > 1 &&
                   <ClearRoundedIcon onClick={handleRemoveQuestion} color='error' id={`remove-${entry[0]}`} sx={{ display: 'flex', order: 1 }}/>
                 }
               </AccordionSummary>
