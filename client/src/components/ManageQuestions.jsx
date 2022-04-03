@@ -13,6 +13,7 @@ import ManageQuestion from './ManageQuestion.jsx';
 import ManageAddQuestion from './ManageAddQuestion.jsx';
 
 const defaultQuestion = {
+  id: "question-0",
   question: "add question here",
   answerOptions: [
     {id: 0, text: "option"},
@@ -55,7 +56,7 @@ export default function ManageQuestions(props) {
         autoComplete="off"
       >
         {questions.map((question, i) => (
-          <React.Fragment key={i}>
+          <React.Fragment key={question.id}>
             <Accordion>
               <AccordionSummary
                 expandIcon={<ExpandMoreIcon />}
