@@ -7,6 +7,8 @@ import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
+import Tooltip from '@mui/material/Tooltip';
+import IconButton from '@mui/material/IconButton';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ClearRoundedIcon from '@mui/icons-material/ClearRounded';
 
@@ -71,7 +73,11 @@ export default function ManageQuestions(props) {
               >
                 <Typography sx={{ display: 'flex', order: 0, marginRight: '80%' }}>{`Question ${i+1}`}</Typography>
                 {Object.entries(questions).length > 1 &&
-                  <ClearRoundedIcon onClick={handleRemoveQuestion} color='error' id={`remove-${entry[0]}`} sx={{ display: 'flex', order: 1 }}/>
+                  <Tooltip title='Remove question'>
+                    <IconButton aria-label='remove question' id={`remove-${entry[0]}`} onClick={handleRemoveQuestion}>
+                      <ClearRoundedIcon color='error' id={`remove-${entry[0]}`} sx={{ display: 'flex', order: 1 }}/>
+                    </IconButton>
+                  </Tooltip>
                 }
               </AccordionSummary>
               <AccordionDetails>
