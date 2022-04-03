@@ -8,7 +8,7 @@ const ManageQuizFrame = (props) => {
   return (
     <Box sx={{ order: 2, alignItems: 'flex-end', marginLeft: 5 }}>
       <ReactDevicePreview device="iphone8" scale="0.8">
-        <Quiz quiz={props.questions} />
+        <Quiz quiz={props.questions} editMode={true} />
       </ReactDevicePreview>
     </Box>
   )
