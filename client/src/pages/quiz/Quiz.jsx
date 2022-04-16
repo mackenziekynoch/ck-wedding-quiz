@@ -1,14 +1,12 @@
 import * as React from 'react';
-
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-
-import QuizLeaderboard from '../../components/QuizLeaderboard.jsx';
 
 import { Header } from '../../components/quiz/Header.jsx';
 import { SeverityAlert } from '../../components/common/alert/SeverityAlert.jsx';
 import { PageStepper } from '../../components/common/stepper/PageStepper.jsx';
 import { Question } from '../../components/quiz/Question.jsx';
+import { PaginatedTable } from '../../components/common/table/PaginatedTable.jsx';
 
 import data from "../../../../database/mock_leaders.json";
 
@@ -38,7 +36,7 @@ export const Quiz = (props) => {
             <Typography sx={{ mt: 2, mb: 1, ml: 1 }}>
               Quiz completed!
             </Typography>
-            <QuizLeaderboard rows={data.rows} />
+            <PaginatedTable rowsPerPage={5} rows={data.rows} title='Quiz Leaderboard' />
           </Box>
         ) : (
           <Box sx={{ width: '100%' }}>
