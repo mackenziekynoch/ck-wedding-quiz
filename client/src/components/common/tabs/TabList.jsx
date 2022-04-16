@@ -15,12 +15,12 @@ export const TabList = (props) => {
   };
 
   return (
-    <Box
-      sx={{ flexGrow: 1, bgcolor: 'background.paper', display: 'flex', height: 224}}
-    >
-      <Tabs value={value} onChange={handleChange} aria-label={`${role} page navigation`} orientation={orientation} >
-        {tabList.map((tab, i) => <Tab key={tab} label={tab} {...a11yProps(tab, i)} />)}
-      </Tabs>
+    <Box sx={other?.outerSx}>
+      <Box sx={other?.tabSx}>
+        <Tabs value={value} onChange={handleChange} aria-label={`${role} page navigation`} orientation={orientation} >
+          {tabList.map((tab, i) => <Tab key={tab} label={tab} {...a11yProps(tab, i)} />)}
+        </Tabs>
+      </Box>
       {childrenList.map((children, i) => (
         <TabPanel key={i} value={value} index={i}>
           { children }

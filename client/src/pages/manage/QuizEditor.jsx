@@ -9,7 +9,8 @@ export const QuizEditor = (props) => {
     <TabList
       role='question editor'
       orientation='vertical'
-      tabList={['Quiz Questions', 'Look &amp; Feel', 'Event Details']}
+      outerSx={{ flexGrow: 1, bgcolor: 'background.paper', display: 'flex', height: 224 }}
+      tabList={['Quiz Questions', 'Look & Feel', 'Event Details']}
       childrenList={[
         <QuestionEditor />,
         'Item Two',
