@@ -26,9 +26,9 @@ const QuizPage = ({question, handleAnswer}) => {
         <Stack spacing={1} alignItems="stretch" justifyContent="flex-start">
           {question.answerOptions.map(option => {
             if (active) {
-              return <Button variant="contained" answer={option.id} key={option.id} onClick={handleClick}>{option.text}</Button>
+              return <Button variant="contained" answer={option.id} key={option.id} onClick={handleClick}>{option.value}</Button>
             } else {
-              return <Button disabled variant="contained" answer={option.id} key={option.id} onClick={handleClick}>{option.text}</Button>
+              return <Button disabled variant="contained" answer={option.id} key={option.id} onClick={handleClick}>{option.value}</Button>
             }
           })}
         </Stack>

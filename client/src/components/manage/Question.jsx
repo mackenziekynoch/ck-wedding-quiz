@@ -1,16 +1,19 @@
 import * as React from 'react';
 import _ from 'lodash';
+import uuid from 'react-uuid'
 import { useDispatch } from 'react-redux';
 import { updateQuestion } from '../../redux/store.js';
 import TextField from '@mui/material/TextField';
+import CheckCircleRoundedIcon from '@mui/icons-material/CheckCircleRounded';
+import CheckCircleOutlineRoundedIcon from '@mui/icons-material/CheckCircleOutlineRounded';
 
-import { QuestionOption } from './QuestionOption.jsx';
+import { ModifiableInputList } from '../common/fields/ModifiableInputList.jsx';
+import { StatusToggleButton } from '../common/buttons/StatusToggleButton.jsx';
 
 export const Question = ({quizQuestion}) => {
   const dispatch = useDispatch();
   const [question, setQuestion] = React.useState(quizQuestion.question);
   const [description, setDescription] = React.useState(quizQuestion.description);
-  const [optionId, setOptionId] = React.useState(quizQuestion.answerOptions.length);
   const [options, setOptions] = React.useState(quizQuestion.answerOptions);
   const [answer, setAnswer] = React.useState(quizQuestion.answer);
 
@@ -24,36 +27,34 @@ export const Question = ({quizQuestion}) => {
     }));
   }, [options, question, description, answer]);
 
-  const addQuestionOption = (event) => {
-    const options_copy = options.slice();
-    options_copy.push({id: optionId, text: 'placeholder'});
-    setOptions(options_copy);
-    setOptionId(optionId + 1);
+  const addQuestionOption = () => {
+    const newOption = {id: uuid(), value: 'placeholder'};
+    setOptions([...options, newOption]);
   };
 
   const removeQuestionOption = (event) => {
     if (options.length === 1) {
       return;
     }
-    let options_copy = options.slice();
-    const id = event.target.parentElement.id;
-    if (id !== undefined && id !== null) {
-      options_copy.splice(id, 1);
-      setOptions(options_copy);
-    }
+    setOptions((arr) => arr.filter(option => event.target.parentElement.id !== option.id));
   };
 
   const updateQuestionOption = (event) => {
-    let options_copy = _.cloneDeep(options);
-    const order = event.target.id.split('-')[2];
-    options_copy[order].text = event.target.value;
-    setOptions(options_copy);
+    setOptions((arr) => arr.map(option => {
+      if (option.id === event.target.id) {
+        let newOption = Object.assign({}, option);
+        newOption.value = event.target.value;
+        return newOption;
+      } else {
+        return option;
+      }
+    }));
   };
 
   const updateQuestionAnswer = (event) => {
-    const id = parseInt(event.target.parentElement.id, 10);
-    if (id !== undefined && id !== null && !isNaN(id)) {
-      setAnswer(id + 1);
+    const targetId = event.target.parentElement.id;
+    if (targetId !== undefined && targetId !== null && targetId !== '') {
+      setAnswer(targetId);
     }
   };
 
@@ -63,6 +64,20 @@ export const Question = ({quizQuestion}) => {
 
   const handleSetDescription = (event) => {
     setDescription(event.target.value);
+  };
+
+  const correctAnswerRender = (option) => {
+    return (
+      <StatusToggleButton
+        key={`correct-answer-button-${option.id}`}
+        title='Correct answer'
+        id={option.id}
+        condition={option.id === answer}
+        onChangeHandler={updateQuestionAnswer}
+        posIcon={<CheckCircleRoundedIcon color="success" id={option.id} />}
+        negIcon={<CheckCircleOutlineRoundedIcon color="default" id={option.id} />}
+      />
+    );
   };
 
   return (
@@ -85,20 +100,15 @@ export const Question = ({quizQuestion}) => {
         onChange={handleSetDescription}
         defaultValue={description}
       />
-      {options.map((option, i) => (
-        <QuestionOption
-          id={i}
-          key={option.id}
-          isAnswer={option.id === answer}
-          includeAddButton={options.length - 1 === i ? true : false}
-          includeRemoveButton={i === 0 && options.length === 1 ? false : true}
-          removeQuestionOption={removeQuestionOption}
-          addQuestionOption={addQuestionOption}
-          updateQuestionOption={updateQuestionOption}
-          updateQuestionAnswer={updateQuestionAnswer}
-          value={option.text}
-        />
-      ))}
+      <ModifiableInputList
+        role='Answer'
+        width='50ch'
+        onChangeHandler={updateQuestionOption}
+        onRemoveHandler={removeQuestionOption}
+        onAddHandler={addQuestionOption}
+        inputs={options}
+        buttonRenderList={[correctAnswerRender]}
+      />
     </div>
   );
-}
+};
