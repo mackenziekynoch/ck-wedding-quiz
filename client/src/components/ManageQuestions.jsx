@@ -4,14 +4,9 @@ import { useSelector, useDispatch } from 'react-redux';
 import { addQuestion, removeQuestion } from '../redux/store.js';
 import Box from '@mui/material/Box';
 import Accordion from '@mui/material/Accordion';
-import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
-import Typography from '@mui/material/Typography';
-import Tooltip from '@mui/material/Tooltip';
-import IconButton from '@mui/material/IconButton';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import ClearRoundedIcon from '@mui/icons-material/ClearRounded';
 
+import { AccordionHeader } from './common/accordion/AccordionHeader.jsx';
 import ManageQuestion from './ManageQuestion.jsx';
 import ManageAddQuestion from './ManageAddQuestion.jsx';
 
@@ -65,21 +60,12 @@ export default function ManageQuestions(props) {
         {Object.entries(questions).map((entry, i) => (
           <React.Fragment key={entry[0]}>
             <Accordion>
-              <AccordionSummary
-                expandIcon={<ExpandMoreIcon />}
-                aria-controls="panel1a-content"
-                id="panel1a-header"
-                sx={{ display: 'flex', flexGrow: 1}}
-              >
-                <Typography sx={{ display: 'flex', order: 0, marginRight: '80%' }}>{`Question ${i+1}`}</Typography>
-                {Object.entries(questions).length > 1 &&
-                  <Tooltip title='Remove question'>
-                    <IconButton aria-label='remove question' id={`remove-${entry[0]}`} onClick={handleRemoveQuestion}>
-                      <ClearRoundedIcon color='error' id={`remove-${entry[0]}`} sx={{ display: 'flex', order: 1 }}/>
-                    </IconButton>
-                  </Tooltip>
-                }
-              </AccordionSummary>
+              <AccordionHeader
+                id={entry[0]}
+                title={`Question ${i+1}`}
+                showRemove={Object.entries(questions).length > 1}
+                removeHandler={handleRemoveQuestion}
+              />
               <AccordionDetails>
                 <ManageQuestion quizQuestion={entry[1]} />
               </AccordionDetails>
