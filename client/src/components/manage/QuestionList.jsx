@@ -4,10 +4,11 @@ import uuid from 'react-uuid';
 import { useSelector, useDispatch } from 'react-redux';
 import { addQuestion, removeQuestion } from '../../redux/store.js';
 import Box from '@mui/material/Box';
+import DynamicFormRoundedIcon from '@mui/icons-material/DynamicFormRounded';
 
 import { FullAccordion } from '../common/accordion/FullAccordion.jsx';
+import { SpeedDialButton } from '../common/buttons/SpeedDialButton.jsx';
 import { Question } from './Question.jsx';
-import ManageAddQuestion from '../ManageAddQuestion.jsx';
 
 export const QuestionList = () => {
   const dispatch = useDispatch();
@@ -60,7 +61,13 @@ export const QuestionList = () => {
             children={<Question quizQuestion={question} />}
           />
         ))}
-        <ManageAddQuestion addQuestion={addDefaultQuestion} />
+        <SpeedDialButton
+          role='manage question'
+          actions={[
+            { icon: <DynamicFormRoundedIcon />, name: 'Add Question', action: addDefaultQuestion }
+          ]}
+          sx={{marginTop: 5, right: '38%'}}
+        />
       </Box>
   );
 }
