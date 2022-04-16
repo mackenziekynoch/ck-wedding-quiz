@@ -2,6 +2,7 @@ import * as React from 'react';
 import { TabList } from '../../components/common/tabs/TabList.jsx';
 
 import { QuestionEditor } from './QuestionEditor.jsx';
+import { ThemeEditor } from './ThemeEditor.jsx';
 
 export const QuizEditor = (props) => {
 
@@ -13,7 +14,7 @@ export const QuizEditor = (props) => {
       tabList={['Quiz Questions', 'Look & Feel', 'Event Details']}
       childrenList={[
         <QuestionEditor />,
-        'Item Two',
+        <ThemeEditor />,
         'Item Three'
       ]}
     />
