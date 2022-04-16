@@ -1,5 +1,5 @@
 import React from "react";
-import Quiz from "./pages/Quiz.jsx";
+// import Quiz from "./pages/Quiz.jsx";
 import store from './redux/store.js';
 import { Provider } from "react-redux";
 
