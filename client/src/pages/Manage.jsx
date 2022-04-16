@@ -4,8 +4,7 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 
-import ManageQuiz from '../components/ManageQuiz.jsx';
-
+import { QuizEditor } from './manage/QuizEditor.jsx';
 
 const TabPanel = (props) => {
   const { children, value, index, ...other } = props;
@@ -51,7 +50,7 @@ export default function Manage(props) {
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}>
-        <ManageQuiz />
+        <QuizEditor />
       </TabPanel>
       <TabPanel value={value} index={1}>
         Item Two
