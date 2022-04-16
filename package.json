@@ -4,7 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build-dev": "webpack -w"
+    "build-dev": "webpack -w",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
   },
   "author": "",
   "license": "ISC",
@@ -19,6 +23,8 @@
     "react-device-preview": "^1.0.6",
     "react-dom": "^17.0.2",
     "react-redux": "^7.2.8",
+    "react-router-dom": "^6.3.0",
+    "react-scripts": "^5.0.1",
     "react-uuid": "^1.0.2"
   },
   "devDependencies": {
