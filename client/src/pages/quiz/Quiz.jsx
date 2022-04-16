@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useSelector } from 'react-redux';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 
@@ -12,7 +13,8 @@ import data from "../../../../database/mock_leaders.json";
 
 
 export const Quiz = (props) => {
-  const { quiz, editMode, ...other } = props;
+  const { editMode, ...other } = props;
+  const quiz = useSelector((state) => state.quiz.quiz);
   const [activeStep, setActiveStep] = React.useState(0);
   const [status, setStatus] = React.useState(null);
 

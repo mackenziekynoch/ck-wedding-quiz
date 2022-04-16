@@ -11,6 +11,7 @@ const App = () => {
   return (
     // <Quiz quiz={data.quiz} />
     <Provider store={store}>
+      {/* <Manage /> */}
       <Routes>
         <Route path="quiz" element={<Quiz />} />
         <Route path="manage" element={<Manage />} />

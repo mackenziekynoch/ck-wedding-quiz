@@ -1,0 +1,40 @@
+{
+  "quiz": {
+    "3e61b-f3b-27a1-44de-52a0dfc3545": {
+      "id": "3e61b-f3b-27a1-44de-52a0dfc3545",
+      "question": "What year was Cole born?",
+      "answerOptions": [
+        {"id": "0c1f6e1-01d6-5604-2f4-ebe72bcae4", "value": "1990"},
+        {"id": "01fa42d-211a-62d-454-f67cbe72fa87", "value": "1994"},
+        {"id": "5411300-64cb-feaa-734b-5f1a745b27f2", "value": "1997"},
+        {"id": "d613ff-0244-0ea-efb5-883e5258450f", "value": "2000"}
+      ],
+      "answer": "01fa42d-211a-62d-454-f67cbe72fa87",
+      "description": "Cole was born on September 9, 1994, and the world quaked with his entry, obviously."
+    },
+    "72b775-30de-c266-30cf-2537707bbd7": {
+      "id": "72b775-30de-c266-30cf-2537707bbd7",
+      "question": "When did Cole and Kelly meet?",
+      "answerOptions": [
+        {"id": "066144-574c-430a-c0c6-d73d6da34ad", "value": "In middle school"},
+        {"id": "821f156-87ad-b5a4-02bf-7d6bbc460ee", "value": "In high school"},
+        {"id": "db454c-3-1ba1-bc82-3bb841640835", "value": "In college"},
+        {"id": "cd77337-e0eb-e601-ee23-a611a6a346a5", "value": "After college"}
+      ],
+      "answer": "821f156-87ad-b5a4-02bf-7d6bbc460ee",
+      "description": "Cole and Kelly started dating in their junior year of high school, following months of Cole pining over Kelly on Facebook. Feel free to dive into his Facebook history to bear witness."
+    },
+    "d54cd7e-3c8-8186-12ef-14c363e0a7c": {
+      "id": "d54cd7e-3c8-8186-12ef-14c363e0a7c",
+      "question": "Where did Cole propose to Kelly?",
+      "answerOptions": [
+        {"id": "cc620e0-f3e-88cc-b6c2-41a885fca6fa", "value": "In their living room"},
+        {"id": "f6346e-643-a68c-6a2-d1d12345bfee", "value": "At the Washington Monument"},
+        {"id": "2eedcb-5d40-cac2-6718-4bf87f4c7", "value": "At Elon"},
+        {"id": "04ae488-d7b6-add5-440-b787012ee12a", "value": "At Kelly's school"}
+      ],
+      "answer": "cc620e0-f3e-88cc-b6c2-41a885fca6fa",
+      "description": "The couple went to someplace, but Cole ended up getting on one knee in their living room!"
+    }
+  }
+}
