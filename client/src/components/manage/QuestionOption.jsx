@@ -8,7 +8,7 @@ import AddCircleOutlineRoundedIcon from '@mui/icons-material/AddCircleOutlineRou
 import CheckCircleRoundedIcon from '@mui/icons-material/CheckCircleRounded';
 import CheckCircleOutlineRoundedIcon from '@mui/icons-material/CheckCircleOutlineRounded';
 
-export default function QuestionOption(props) {
+export const QuestionOption = (props) => {
   const { id, value, isAnswer, includeAddButton, includeRemoveButton, updateQuestionAnswer, addQuestionOption, removeQuestionOption, updateQuestionOption } = props
   return (
     <div>

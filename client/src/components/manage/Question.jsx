@@ -1,12 +1,12 @@
 import * as React from 'react';
 import _ from 'lodash';
 import { useDispatch } from 'react-redux';
-import { updateQuestion } from '../redux/store.js';
+import { updateQuestion } from '../../redux/store.js';
 import TextField from '@mui/material/TextField';
 
-import QuestionOption from './QuestionOption.jsx';
+import { QuestionOption } from './QuestionOption.jsx';
 
-export default function ManageQuestion({quizQuestion}) {
+export const Question = ({quizQuestion}) => {
   const dispatch = useDispatch();
   const [question, setQuestion] = React.useState(quizQuestion.question);
   const [description, setDescription] = React.useState(quizQuestion.description);

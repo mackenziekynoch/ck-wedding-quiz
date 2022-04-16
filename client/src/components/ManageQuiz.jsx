@@ -5,7 +5,7 @@ import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 
 import ManageQuizFrame from './ManageQuizFrame.jsx';
-import ManageQuestions from './ManageQuestions.jsx';
+import { QuestionList } from './manage/QuestionList.jsx';
 
 
 const TabPanel = (props) => {
@@ -53,7 +53,8 @@ export default function ManageQuiz(props) {
       </Tabs>
       <TabPanel value={value} index={0}>
         <Box sx={{ display: 'flex', flexDirection: 'row' }}>
-          <ManageQuestions />
+          {/* <ManageQuestions /> */}
+          <QuestionList />
           <ManageQuizFrame />
         </Box>
       </TabPanel>

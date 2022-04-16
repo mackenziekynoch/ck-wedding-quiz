@@ -1,14 +1,12 @@
 import * as React from 'react';
 import _ from 'lodash';
 import { useSelector, useDispatch } from 'react-redux';
-import { addQuestion, removeQuestion } from '../redux/store.js';
+import { addQuestion, removeQuestion } from '../../redux/store.js';
 import Box from '@mui/material/Box';
-import Accordion from '@mui/material/Accordion';
-import AccordionDetails from '@mui/material/AccordionDetails';
 
-import { AccordionHeader } from './common/accordion/AccordionHeader.jsx';
-import ManageQuestion from './ManageQuestion.jsx';
-import ManageAddQuestion from './ManageAddQuestion.jsx';
+import { FullAccordion } from '../common/accordion/FullAccordion.jsx';
+import { Question } from './Question.jsx';
+import ManageAddQuestion from '../ManageAddQuestion.jsx';
 
 const defaultQuestion = {
   id: "question-default",
@@ -20,9 +18,9 @@ const defaultQuestion = {
   description: "add description here"
 };
 
-export default function ManageQuestions(props) {
-  const questions = useSelector(state => state.quiz.quiz);
+export const QuestionList = () => {
   const dispatch = useDispatch();
+  const questions = useSelector(state => state.quiz.quiz);
   const [questionId, setQuestionId] = React.useState(questions.length);
 
   const addDefaultQuestion = () => {
@@ -46,7 +44,6 @@ export default function ManageQuestions(props) {
   };
 
   return (
-    <React.Fragment>
       <Box
         component="form"
         sx={{
@@ -57,23 +54,17 @@ export default function ManageQuestions(props) {
         noValidate
         autoComplete="off"
       >
-        {Object.entries(questions).map((entry, i) => (
-          <React.Fragment key={entry[0]}>
-            <Accordion>
-              <AccordionHeader
-                id={entry[0]}
-                title={`Question ${i+1}`}
-                showRemove={Object.entries(questions).length > 1}
-                removeHandler={handleRemoveQuestion}
-              />
-              <AccordionDetails>
-                <ManageQuestion quizQuestion={entry[1]} />
-              </AccordionDetails>
-            </Accordion>
-          </React.Fragment>
+        {Object.entries(questions).map(([questionId, question], i) => (
+          <FullAccordion
+            key={questionId}
+            id={questionId}
+            title={`Question ${i+1}`}
+            showRemove={Object.entries(questions).length > 1}
+            removeHandler={handleRemoveQuestion}
+            children={<Question quizQuestion={question} />}
+          />
         ))}
         <ManageAddQuestion addQuestion={addDefaultQuestion} />
       </Box>
-    </React.Fragment>
   );
 }
