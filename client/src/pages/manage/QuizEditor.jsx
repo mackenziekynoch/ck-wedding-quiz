@@ -3,6 +3,7 @@ import { TabList } from '../../components/common/tabs/TabList.jsx';
 
 import { QuestionEditor } from './QuestionEditor.jsx';
 import { ThemeEditor } from './ThemeEditor.jsx';
+import { EventEditor } from './EventEditor.jsx';
 
 export const QuizEditor = (props) => {
 
@@ -15,7 +16,7 @@ export const QuizEditor = (props) => {
       childrenList={[
         <QuestionEditor />,
         <ThemeEditor />,
-        'Item Three'
+        <EventEditor />,
       ]}
     />
   );

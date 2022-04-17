@@ -15,6 +15,7 @@ import data from "../../../../database/mock_leaders.json";
 export const Quiz = (props) => {
   const { editMode, ...other } = props;
   const quiz = useSelector((state) => state.quiz.quiz);
+  const eventName = useSelector(state => state.event.eventName);
   const [activeStep, setActiveStep] = React.useState(0);
   const [status, setStatus] = React.useState(null);
 
@@ -28,7 +29,7 @@ export const Quiz = (props) => {
 
   return (
     <React.Fragment>
-      <Header title={`Cole & Kelly's Wedding`} />
+      <Header title={eventName} />
       <PageStepper
         stepCount={Object.keys(quiz).length}
         handleStep={handlePageChange}

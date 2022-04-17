@@ -22,7 +22,6 @@ const quizSlice = createSlice({
 
 export const {updateQuestion, addQuestion, removeQuestion} = quizSlice.actions;
 
-
 const themeSlice = createSlice({
   name: 'theme',
   initialState: {
@@ -37,9 +36,24 @@ const themeSlice = createSlice({
 
 export const {updateTheme} = themeSlice.actions;
 
+const eventSlice = createSlice({
+  name: 'event',
+  initialState: {
+    eventName: 'Event Name'
+  },
+  reducers: {
+    updateName: (state, action) => {
+      state.eventName = action.payload;
+    },
+  },
+});
+
+export const {updateName} = eventSlice.actions;
+
 export default configureStore({
   reducer: {
     quiz: quizSlice.reducer,
     theme: themeSlice.reducer,
+    event: eventSlice.reducer,
   },
 });
