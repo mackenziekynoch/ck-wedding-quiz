@@ -44,6 +44,7 @@ const CustomPageIconRoot = styled('div')(({theme}) => ({
     backgroundColor: theme?.components?.stepper?.color || theme.palette.primary.main,
   },
 }));
+
 const CustomPageIcon = (props) => {
   const { active, completed, className } = props;
   const theme = useSelector(state => state.theme.theme);
@@ -58,7 +59,11 @@ const CustomPageIcon = (props) => {
       )}
     </CustomPageIconRoot>
   );
-}
+};
+
+const NextButton = styled(Button)(({theme}) => ({
+  color: theme?.components?.nextPage?.fontColor || theme.palette.primary.main,
+}));
 
 export const PageStepper = (props) => {
   const { stepCount, handleStep, page, editMode = false, ...other } = props;
@@ -98,7 +103,7 @@ export const PageStepper = (props) => {
         })}
       </Stepper>
       { page }
-      {activeStep === steps.length ? (
+      {activeStep === steps.length && editMode ? (
         <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
           <Box sx={{ flex: '1 1 auto' }} />
           <Button onClick={handleReset}>Reset</Button>
@@ -116,9 +121,9 @@ export const PageStepper = (props) => {
             </Button>
           }
           <Box sx={{ flex: '1 1 auto' }} />
-          <Button onClick={handleNext}>
+          <NextButton onClick={handleNext}>
             {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
-          </Button>
+          </NextButton>
         </Box>
       )}
     </Box>

@@ -11,7 +11,7 @@ export const AccordionHeader = ({id, title, showRemove, removeHandler}) => {
       aria-controls="panel1a-content"
       sx={{ display: 'flex', flexGrow: 1}}
     >
-      <Typography sx={{ display: 'flex', order: 0, marginRight: '80%', minWidth: 300 }}>{title}</Typography>
+      <Typography variant='h6' sx={{ display: 'flex', order: 0, marginRight: '80%', minWidth: 300 }}>{title}</Typography>
       {showRemove &&
         <RemoveButton id={id} clickHandler={removeHandler} />
       }

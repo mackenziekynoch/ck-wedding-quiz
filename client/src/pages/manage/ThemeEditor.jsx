@@ -80,9 +80,6 @@ export const ThemeEditor = (props) => {
             bgColor={{handler: (color) => {
               handleBgColorChange('stepper', color)
             }}}
-            fontSize={{handler: (size) => {
-              handleFontSizeChange('stepper', size)
-            }}}
             select={{
               label: 'Icon type',
               options: [
@@ -99,10 +96,41 @@ export const ThemeEditor = (props) => {
               }
             }}
           />
-          <ThemeFields title='Question title theme' bgColor={{handler: () => {}}} fontSize={true} font={true} />
-          <ThemeFields title='Question options theme' bgColor={{handler: () => {}}} fontSize={true} font={true} />
-          <ThemeFields title='Question description theme' bgColor={{handler: () => {}}} fontSize={true} font={true} />
-          <ThemeFields title='Next page theme' bgColor={{handler: () => {}}} fontSize={true} />
+          <ThemeFields
+            title='Question title theme'
+            fontColor={{handler: (color) => {
+              handleFontColorChange('questionTitle', color)
+            }}}
+            fontSize={{handler: (size) => {
+              handleFontSizeChange('questionTitle', size)
+            }}}
+          />
+          <ThemeFields
+            title='Question options theme'
+            bgColor={{handler: (color) => {
+              handleBgColorChange('questionOption', color)
+            }}}
+            fontColor={{handler: (color) => {
+              handleFontColorChange('questionOption', color)
+            }}}
+            fontSize={{handler: (size) => {
+              handleFontSizeChange('questionOption', size)
+            }}} />
+          <ThemeFields
+            title='Question description theme'
+            fontColor={{handler: (color) => {
+              handleFontColorChange('questionDescription', color)
+            }}}
+            fontSize={{handler: (size) => {
+              handleFontSizeChange('questionDescription', size)
+            }}}
+          />
+          <ThemeFields
+            title='Next page theme'
+            fontColor={{handler: (color) => {
+              handleFontColorChange('nextPage', color)
+            }}}
+          />
           <ThemeFields title='Leaderboard theme' />
         </Stack>
       </Box>

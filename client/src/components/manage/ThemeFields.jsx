@@ -37,23 +37,6 @@ export const ThemeFields = (props) => {
       <LabeledSlider defaultValue={14} max={30} key={`${title}-font-size`} title={`${title} font size`} handleChange={other.fontSize.handler} />
     );
   }
-  if (other?.font !== undefined) {
-    children.push(
-      <Autocomplete
-        key='font'
-        disablePortal
-        id="select-text-font"
-        options={['Helvetica', 'Arial', 'Times']}
-        renderInput={(params) => <TextField {...params} label="Font" />}
-        renderOption={(props, option) => (
-          <MenuItem value={option} {...props}>
-            <Typography sx={{fontFamily: option}}>{option}</Typography>
-          </MenuItem>
-        )}
-        onChange={(e, newValue) => {other.font.handler(newValue)}}
-      />
-    );
-  }
   if (other?.select !== undefined) {
     children.push(
       <Select
