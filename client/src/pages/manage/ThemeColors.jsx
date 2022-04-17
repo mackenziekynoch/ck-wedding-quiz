@@ -5,7 +5,7 @@ import { VerticalButtonGroup } from '../../components/common/buttons/VerticalBut
 
 export const ThemeColors = (props) => {
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'row' }}>
+    <Box sx={{ minWidth: 600 }}>
       <VerticalButtonGroup
         role='theme colors'
         buttons={[

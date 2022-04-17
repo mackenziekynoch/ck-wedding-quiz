@@ -26,14 +26,14 @@ export const TargetColorPicker = (props) => {
   return (
     <Grid container spacing={2}>
       <Grid item xs={8}>
-        <Typography>{title}</Typography>
+        <Typography >{title}</Typography>
       </Grid>
       <Grid item xs={4}>
         <Button sx={{backgroundColor: color, height: 20}} onClick={handleClick} />
         <Dialog open={open}>
           <DialogTitle>{title}</DialogTitle>
           <SketchPicker color={color} onChangeComplete={changeHandler} />
-          <Button variant="outlined" onClick={handleClose}>Close</Button>
+          <Button variant="outlined" color="error" onClick={handleClose}>Close</Button>
         </Dialog>
       </Grid>
     </Grid>

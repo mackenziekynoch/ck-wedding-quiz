@@ -12,7 +12,7 @@ export const Manage = (props) => {
         role='manage console'
         orientation='horizontal'
         tabSx={{ borderBottom: 1, borderColor: 'divider' }}
-        tabList={['Quiz', 'Event', 'Profile']}
+        tabList={['quiz', 'event', 'profile']}
         childrenList={[
           <QuizEditor />,
           "Item Two",
