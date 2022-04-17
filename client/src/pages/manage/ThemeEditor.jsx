@@ -17,6 +17,9 @@ import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { PreviewQuiz } from '../../components/manage/PreviewQuiz.jsx';
 import { ThemeFields } from '../../components/manage/ThemeFields.jsx';
 
+const fontSizeOptions = [
+  'body1', 'subtitle2', 'subtitle1', 'h6', 'h5', 'h4', 'h3', 'h2'
+];
 
 export const ThemeEditor = (props) => {
   const dispatch = useDispatch();
@@ -37,11 +40,6 @@ export const ThemeEditor = (props) => {
     _.set(newTheme, ['components', property, 'fontSize'], size);
     dispatch(updateTheme(newTheme));
   };
-  const handleFontChange = (property, font) => {
-    const newTheme = _.cloneDeep(theme);
-    _.set(newTheme, ['components', property, 'font'], font);
-    dispatch(updateTheme(newTheme));
-  };
   const handleSelectChange = (property, target, value) => {
     const newTheme = _.cloneDeep(theme);
     _.set(newTheme, ['components', property, target], value);
@@ -58,28 +56,46 @@ export const ThemeEditor = (props) => {
         autoComplete="off"
       >
         <Stack sx={{width: 650}}>
-          <ThemeFields title='Global theme' bgColor={{handler: (color) => {
-            const newTheme = _.cloneDeep(theme);
-            _.set(newTheme, ['palette', 'primary', 'main'], color);
-            dispatch(updateTheme(newTheme));
-          }}} />
+          <ThemeFields
+            title='Global theme'
+            bgColor={{
+              handler: (color) => {
+                const newTheme = _.cloneDeep(theme);
+                _.set(newTheme, ['palette', 'primary', 'main'], color);
+                dispatch(updateTheme(newTheme));
+              },
+              defaultValue: _.get(theme, ['palette', 'primary', 'main'])
+            }}
+          />
           <ThemeFields
             title='Header theme'
-            bgColor={{handler: (color) => {
-              handleBgColorChange('header', color);
-            }}}
-            fontColor={{handler: (color) => {
-              handleFontColorChange('header', color)
-            }}}
-            fontSize={{handler: (size) => {
-              handleFontSizeChange('header', size)
-            }}}
+            bgColor={{
+              handler: (color) => {
+                handleBgColorChange('header', color);
+              },
+              defaultValue: _.get(theme, ['components', 'header', 'color']) || _.get(theme, ['palette', 'primary', 'main'])
+            }}
+            fontColor={{
+              handler: (color) => {
+                handleFontColorChange('header', color)
+              },
+              defaultValue: _.get(theme, ['components', 'header', 'fontColor']) || _.get(theme, ['palette', 'primary', 'contrastText'])
+            }}
+            fontSize={{
+              handler: (size) => {
+                handleFontSizeChange('header', fontSizeOptions[size])
+              },
+              defaultValue: fontSizeOptions.indexOf(_.get(theme, ['components', 'header', 'fontSize']) || 'h6')
+            }}
           />
           <ThemeFields
             title='Page counter theme'
-            bgColor={{handler: (color) => {
-              handleBgColorChange('stepper', color)
-            }}}
+            bgColor={{
+              handler: (color) => {
+                handleBgColorChange('stepper', color)
+              },
+              defaultValue: _.get(theme, ['components', 'stepper', 'color']) || _.get(theme, ['palette', 'primary', 'main'])
+            }}
             select={{
               label: 'Icon type',
               options: [
@@ -98,38 +114,62 @@ export const ThemeEditor = (props) => {
           />
           <ThemeFields
             title='Question title theme'
-            fontColor={{handler: (color) => {
-              handleFontColorChange('questionTitle', color)
-            }}}
-            fontSize={{handler: (size) => {
-              handleFontSizeChange('questionTitle', size)
-            }}}
+            fontColor={{
+              handler: (color) => {
+                handleFontColorChange('questionTitle', color)
+              },
+              defaultValue: _.get(theme, ['components', 'questionTitle', 'fontColor']) || _.get(theme, ['palette', 'text', 'primary'])
+            }}
+            fontSize={{
+              handler: (size) => {
+                handleFontSizeChange('questionTitle', fontSizeOptions[size])
+              },
+              defaultValue: fontSizeOptions.indexOf(_.get(theme, ['components', 'questionTitle', 'fontSize']) || 'h6')
+            }}
           />
           <ThemeFields
             title='Question options theme'
-            bgColor={{handler: (color) => {
-              handleBgColorChange('questionOption', color)
-            }}}
-            fontColor={{handler: (color) => {
-              handleFontColorChange('questionOption', color)
-            }}}
-            fontSize={{handler: (size) => {
-              handleFontSizeChange('questionOption', size)
-            }}} />
+            bgColor={{
+              handler: (color) => {
+                handleBgColorChange('questionOption', color)
+              },
+              defaultValue: _.get(theme, ['components', 'questionOption', 'color']) || _.get(theme, ['palette', 'primary', 'main'])
+            }}
+            fontColor={{
+              handler: (color) => {
+                handleFontColorChange('questionOption', color)
+              },
+              defaultValue: _.get(theme, ['components', 'questionOption', 'fontColor']) || _.get(theme, ['palette', 'primary', 'contrastText'])
+            }}
+            fontSize={{
+              handler: (size) => {
+                handleFontSizeChange('questionOption', fontSizeOptions[size])
+              },
+              defaultValue: fontSizeOptions.indexOf(_.get(theme, ['components', 'questionOption', 'fontSize']) || 'body1')
+            }} />
           <ThemeFields
             title='Question description theme'
-            fontColor={{handler: (color) => {
-              handleFontColorChange('questionDescription', color)
-            }}}
-            fontSize={{handler: (size) => {
-              handleFontSizeChange('questionDescription', size)
-            }}}
+            fontColor={{
+              handler: (color) => {
+                handleFontColorChange('questionDescription', color)
+              },
+              defaultValue: _.get(theme, ['components', 'questionDescription', 'fontColor']) || _.get(theme, ['palette', 'text', 'primary'])
+            }}
+            fontSize={{
+              handler: (size) => {
+                handleFontSizeChange('questionDescription', fontSizeOptions[size])
+              },
+              defaultValue: fontSizeOptions.indexOf(_.get(theme, ['components', 'questionDescription', 'fontSize']) || 'body1')
+            }}
           />
           <ThemeFields
             title='Next page theme'
-            fontColor={{handler: (color) => {
-              handleFontColorChange('nextPage', color)
-            }}}
+            fontColor={{
+              handler: (color) => {
+                handleFontColorChange('nextPage', color)
+              },
+              defaultValue: _.get(theme, ['components', 'nextPage', 'fontColor']) || _.get(theme, ['palette', 'primary', 'main'])
+            }}
           />
           <ThemeFields title='Leaderboard theme' />
         </Stack>

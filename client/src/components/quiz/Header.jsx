@@ -11,7 +11,7 @@ const StyledAppBar = styled(AppBar)(({theme}) => ({
 }));
 
 const StyledAppTitle = styled(Typography)(({theme}) => ({
-  fontSize: theme?.components?.header?.fontSize || theme.typography.h6.fontSize,
+  fontSize: theme.typography[theme?.components?.header?.fontSize]?.fontSize || theme.typography.h6.fontSize,
 }))
 
 export const Header = (props) => {

@@ -7,18 +7,18 @@ import Typography from '@mui/material/Typography';
 
 const QuestionTitle = styled(Typography)(({theme}) => ({
   color: theme?.components?.questionTitle?.fontColor || theme.palette.text.primary,
-  fontSize: theme?.components?.questionTitle?.fontSize || theme.typography.h6.fontSize,
+  fontSize: theme.typography[theme?.components?.questionTitle?.fontSize]?.fontSize || theme.typography.h6.fontSize,
 }));
 
 const QuestionOption = styled(Button)(({theme}) => ({
   color: theme?.components?.questionOption?.fontColor || theme.palette.primary.contrastText,
-  fontSize: theme?.components?.questionOption?.fontSize || theme.typography.body1.fontSize,
+  fontSize: theme.typography[theme?.components?.questionOption?.fontSize]?.fontSize || theme.typography.body1.fontSize,
   backgroundColor: theme?.components?.questionOption?.color || theme.palette.primary.main,
 }));
 
 const QuestionDescription = styled(Typography)(({theme}) => ({
   color: theme?.components?.questionDescription?.fontColor || theme.palette.text.primary,
-  fontSize: theme?.components?.questionDescription?.fontSize || theme.typography.body1.fontSize,
+  fontSize: theme.typography[theme?.components?.questionDescription?.fontSize]?.fontSize || theme.typography.body1.fontSize,
 }));
 
 export const Question = (props) => {
