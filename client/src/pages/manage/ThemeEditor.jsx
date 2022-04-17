@@ -118,7 +118,7 @@ export const ThemeEditor = (props) => {
               handler: (color) => {
                 handleFontColorChange('questionTitle', color)
               },
-              defaultValue: _.get(theme, ['components', 'questionTitle', 'fontColor']) || _.get(theme, ['palette', 'text', 'primary'])
+              defaultValue: _.get(theme, ['components', 'questionTitle', 'fontColor']) || _.get(theme, ['palette', 'common', 'black'])
             }}
             fontSize={{
               handler: (size) => {
@@ -171,7 +171,6 @@ export const ThemeEditor = (props) => {
               defaultValue: _.get(theme, ['components', 'nextPage', 'fontColor']) || _.get(theme, ['palette', 'primary', 'main'])
             }}
           />
-          <ThemeFields title='Leaderboard theme' />
         </Stack>
       </Box>
       <ThemeProvider theme={createTheme(theme)}>

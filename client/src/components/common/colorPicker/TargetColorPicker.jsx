@@ -13,6 +13,9 @@ export const TargetColorPicker = (props) => {
   const { defaultValue, title, handleColorChange } = props;
   const [open, setOpen] = React.useState(false);
   const [color, setColor] = React.useState(defaultValue);
+  React.useEffect(() => {
+    setColor(defaultValue);
+  }, [defaultValue]);
   const changeHandler = (color) => {
     setColor(color.hex);
     handleColorChange(color.hex);
@@ -29,7 +32,7 @@ export const TargetColorPicker = (props) => {
         <Typography >{title}</Typography>
       </Grid>
       <Grid item xs={4}>
-        <Button sx={{backgroundColor: color, height: 20}} onClick={handleClick} />
+        <Button variant='outlined' sx={{backgroundColor: color, height: 20}} onClick={handleClick} />
         <Dialog open={open}>
           <DialogTitle>{title}</DialogTitle>
           <SketchPicker color={color} onChangeComplete={changeHandler} />

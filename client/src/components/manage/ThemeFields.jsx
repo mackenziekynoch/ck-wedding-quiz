@@ -42,13 +42,6 @@ export const ThemeFields = (props) => {
         key={`${title}-font-size`}
         handleChange={other.fontSize.handler}
       />
-      // <LabeledSlider
-      //   defaultValue={other.fontSize.defaultValue}
-      //   max={30}
-      //   key={`${title}-font-size`}
-      //   title={`${title} font size`}
-      //   handleChange={other.fontSize.handler}
-      // />
     );
   }
   if (other?.select !== undefined) {
