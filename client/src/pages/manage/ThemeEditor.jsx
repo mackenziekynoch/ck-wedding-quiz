@@ -78,10 +78,10 @@ export const ThemeEditor = (props) => {
           <ThemeFields
             title='Page counter theme'
             bgColor={{handler: (color) => {
-              handleBgColorChange('counter', color)
+              handleBgColorChange('stepper', color)
             }}}
             fontSize={{handler: (size) => {
-              handleFontSizeChange('counter', size)
+              handleFontSizeChange('stepper', size)
             }}}
             select={{
               label: 'Icon type',

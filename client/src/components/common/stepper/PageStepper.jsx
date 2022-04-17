@@ -35,7 +35,7 @@ const CustomPageIconRoot = styled('div')(({theme}) => ({
   '& .CustomPageIcon-completedIcon': {
     color: theme?.components?.stepper?.color || theme.palette.primary.main,
     zIndex: 1,
-    fontSize: 18,
+    fontSize: 30,
   },
   '& .CustomPageIcon-circle': {
     width: 8,
