@@ -14,7 +14,6 @@ import data from "../../../../database/mock_leaders.json";
 
 export const Quiz = (props) => {
   const { editMode, ...other } = props;
-  console.log('quiz editMode', editMode)
   const quiz = useSelector((state) => state.quiz.quiz);
   const eventName = useSelector(state => state.event.eventName);
   const [activeStep, setActiveStep] = React.useState(0);
