@@ -3,6 +3,7 @@ import Box from '@mui/material/Box';
 
 import { QuizEditor } from './QuizEditor.jsx';
 import { TabList } from '../../components/common/tabs/TabList.jsx';
+import { PreviewPage } from './PreviewPage.jsx';
 
 
 export const Manage = (props) => {
@@ -12,11 +13,10 @@ export const Manage = (props) => {
         role='manage console'
         orientation='horizontal'
         tabSx={{ borderBottom: 1, borderColor: 'divider' }}
-        tabList={['quiz', 'event', 'profile']}
+        tabList={['quiz', 'preview']}
         childrenList={[
           <QuizEditor />,
-          "Item Two",
-          "Item Three"
+          <PreviewPage />,
         ]}
       />
     </Box>

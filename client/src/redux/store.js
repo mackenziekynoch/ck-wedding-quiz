@@ -39,7 +39,7 @@ export const {updateTheme} = themeSlice.actions;
 const eventSlice = createSlice({
   name: 'event',
   initialState: {
-    eventName: 'Event Name'
+    eventName: data.event.title,
   },
   reducers: {
     updateName: (state, action) => {

@@ -12,11 +12,11 @@ export const QuizEditor = (props) => {
       role='question editor'
       orientation='vertical'
       outerSx={{ flexGrow: 1, bgcolor: 'background.paper', display: 'flex', height: 224 }}
-      tabList={['Quiz Questions', 'Look & Feel', 'Event Details']}
+      tabList={['Event Details', 'Quiz Questions', 'Look & Feel']}
       childrenList={[
+        <EventEditor />,
         <QuestionEditor />,
         <ThemeEditor />,
-        <EventEditor />,
       ]}
     />
   );
