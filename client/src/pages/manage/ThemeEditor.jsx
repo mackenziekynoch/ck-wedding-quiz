@@ -174,7 +174,7 @@ export const ThemeEditor = (props) => {
         </Stack>
       </Box>
       <ThemeProvider theme={createTheme(theme)}>
-        <PreviewQuiz />
+        <PreviewQuiz editMode={true} />
       </ThemeProvider>
     </Box>
   );

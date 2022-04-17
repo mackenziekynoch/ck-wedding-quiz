@@ -12,7 +12,7 @@ export const QuestionEditor = (props) => {
     <Box sx={{ display: 'flex', flexDirection: 'row' }}>
       <QuestionList />
       <ThemeProvider theme={createTheme(theme)}>
-        <PreviewQuiz />
+        <PreviewQuiz editMode={true}/>
       </ThemeProvider>
     </Box>
   );

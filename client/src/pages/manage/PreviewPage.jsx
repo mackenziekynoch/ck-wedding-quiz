@@ -18,7 +18,7 @@ export const PreviewPage = (props) => {
         </Grid>
         <Grid item xs={8}>
           <ThemeProvider theme={createTheme(theme)}>
-            <PreviewQuiz />
+            <PreviewQuiz editMode={false} />
           </ThemeProvider>
         </Grid>
       </Grid>

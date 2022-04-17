@@ -24,7 +24,7 @@ export const EventEditor = (props) => {
         </Grid>
         <Grid item xs={3}>
           <ThemeProvider theme={createTheme(theme)}>
-            <PreviewQuiz />
+            <PreviewQuiz editMode={true} />
           </ThemeProvider>
         </Grid>
       </Grid>
