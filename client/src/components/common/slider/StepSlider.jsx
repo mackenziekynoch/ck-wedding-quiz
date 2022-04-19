@@ -4,7 +4,7 @@ import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 
 export const StepSlider = (props) => {
-  const {defaultValue, title, handleChange} = props;
+  const {defaultValue, title, handleChange, min, max} = props;
   const [value, setValue] = React.useState(defaultValue);
   return (
     <Stack direction='row' spacing={2}>
@@ -12,8 +12,8 @@ export const StepSlider = (props) => {
       <Slider
         key={`${title}-font-size`}
         value={value}
-        min={1}
-        max={7}
+        min={min}
+        max={max}
         step={1}
         marks
         valueLabelDisplay="auto"

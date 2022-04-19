@@ -6,9 +6,9 @@ import Select from '@mui/material/Select';
 
 import { FullAccordion } from '../../components/common/accordion/FullAccordion.jsx';
 import { TargetColorPicker } from '../../components/common/colorPicker/TargetColorPicker.jsx';
-import { LabeledSlider } from '../common/slider/LabeledSlider.jsx';
 import { StepSlider } from '../common/slider/StepSlider.jsx';
 import { StatefulSelect } from '../common/select/StatefulSelect.jsx';
+import { AlignTextButtons } from './AlignTextButtons.jsx';
 
 
 export const ThemeFields = (props) => {
@@ -41,6 +41,8 @@ export const ThemeFields = (props) => {
         title={`${title} font size`}
         key={`${title}-font-size`}
         handleChange={other.fontSize.handler}
+        min={1}
+        max={7}
       />
     );
   }
@@ -54,6 +56,27 @@ export const ThemeFields = (props) => {
         handler={other.select.handler}
       />
     );
+  }
+  if (other?.align !== undefined) {
+    children.push(
+      <AlignTextButtons
+        key={`${title}-align-items`}
+        handleChange={other.align.handler}
+        defaultValue={other.align.defaultValue}
+      />
+    );
+  }
+  if (other?.fontWeight !== undefined) {
+    children.push(
+      <StepSlider
+        defaultValue={other.fontWeight.defaultValue}
+        title={`${title} font weight`}
+        key={`${title}-font-weight`}
+        handleChange={other.fontWeight.handler}
+        min={1}
+        max={3}
+      />
+    )
   }
   return (
     <FullAccordion

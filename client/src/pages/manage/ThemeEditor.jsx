@@ -17,6 +17,7 @@ import { ThemeFields } from '../../components/manage/ThemeFields.jsx';
 const fontSizeOptions = [
   'body1', 'subtitle2', 'subtitle1', 'h6', 'h5', 'h4', 'h3', 'h2'
 ];
+const weightOptions = ['300', '400', '700'];
 
 export const ThemeEditor = (props) => {
   const dispatch = useDispatch();
@@ -42,6 +43,16 @@ export const ThemeEditor = (props) => {
     _.set(newTheme, ['components', property, target], value);
     dispatch(updateTheme(newTheme));
   };
+  const handleAlignChange = (property, alignment) => {
+    const newTheme = _.cloneDeep(theme);
+    _.set(newTheme, ['components', property, 'alignItems'], alignment);
+    dispatch(updateTheme(newTheme));
+  }
+  const handleFontWeightChange = (property, weight) => {
+    const newTheme = _.cloneDeep(theme);
+    _.set(newTheme, ['components', property, 'fontWeight'], weightOptions[weight - 1]);
+    dispatch(updateTheme(newTheme));
+  }
   return (
     <Box sx={{ display: 'flex', flexDirection: 'row' }}>
       <Box
@@ -84,6 +95,18 @@ export const ThemeEditor = (props) => {
                 handleFontSizeChange('header', fontSizeOptions[size])
               },
               defaultValue: fontSizeOptions.indexOf(_.get(theme, ['components', 'header', 'fontSize']) || 'h6')
+            }}
+            align={{
+              handler: (alignment) => {
+                handleAlignChange('header', alignment)
+              },
+              defaultValue: _.get(theme, ['components', 'header', 'alignItems']) || 'start'
+            }}
+            fontWeight={{
+              handler: (weight) => {
+                handleFontWeightChange('header', weight)
+              },
+              defaultValue: weightOptions.indexOf(_.get(theme, ['components', 'header', 'fontWeight']) || '400') + 1
             }}
           />
           <ThemeFields
