@@ -34,7 +34,7 @@ export const QuestionList = () => {
       return;
     }
     const targetId = e.target.parentElement.id;
-    if (idArr === undefined) {
+    if (targetId === undefined) {
       return;
     }
     dispatch(removeQuestion({id: targetId}));
@@ -47,6 +47,7 @@ export const QuestionList = () => {
           '& .MuiTextField-root': { m: 1 },
           order: 1,
           flexGrow: 2,
+          width: '100%'
         }}
         noValidate
         autoComplete="off"

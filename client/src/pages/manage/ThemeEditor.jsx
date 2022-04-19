@@ -12,9 +12,6 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { updateTheme } from '../../redux/store.js';
-import { ThemeProvider, createTheme } from '@mui/material/styles';
-
-import { PreviewQuiz } from '../../components/manage/PreviewQuiz.jsx';
 import { ThemeFields } from '../../components/manage/ThemeFields.jsx';
 
 const fontSizeOptions = [
@@ -51,6 +48,7 @@ export const ThemeEditor = (props) => {
         sx={{
           order: 1,
           flexGrow: 2,
+          width: '100%'
         }}
         noValidate
         autoComplete="off"
@@ -173,9 +171,6 @@ export const ThemeEditor = (props) => {
           />
         </Stack>
       </Box>
-      <ThemeProvider theme={createTheme(theme)}>
-        <PreviewQuiz editMode={true} />
-      </ThemeProvider>
     </Box>
   );
 }

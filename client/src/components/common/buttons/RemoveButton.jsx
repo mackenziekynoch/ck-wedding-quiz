@@ -7,7 +7,7 @@ export const RemoveButton = ({ id, clickHandler }) => {
   return (
     <Tooltip title='Remove question'>
       <IconButton aria-label='remove question' id={`remove-${id}`} onClick={clickHandler}>
-        <ClearRoundedIcon color='error' id={`remove-${id}`} sx={{ display: 'flex', order: 1 }}/>
+        <ClearRoundedIcon color='error' id={`${id}`} sx={{ display: 'flex', order: 1 }}/>
       </IconButton>
     </Tooltip>
   );

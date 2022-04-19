@@ -23,6 +23,7 @@ export const TabList = (props) => {
             <Tab
               key={tab}
               label={tab}
+              sx={{minWidth: 200}}
               {...a11yProps(tab, i)}
             />
           ))}
