@@ -1,8 +1,6 @@
 import * as React from 'react';
 import Divider from '@mui/material/Divider';
 import Stack from '@mui/material/Stack';
-import MenuItem from '@mui/material/MenuItem';
-import Select from '@mui/material/Select';
 
 import { FullAccordion } from '../../components/common/accordion/FullAccordion.jsx';
 import { TargetColorPicker } from '../../components/common/colorPicker/TargetColorPicker.jsx';
@@ -12,7 +10,7 @@ import { AlignTextButtons } from './AlignTextButtons.jsx';
 
 
 export const ThemeFields = (props) => {
-  const { title, ...other } = props;
+  const { title, handleChange, expanded, ...other } = props;
   const children = [];
   if (other?.bgColor !== undefined) {
     children.push(
@@ -85,6 +83,8 @@ export const ThemeFields = (props) => {
       title={title}
       showRemove={false}
       removeHandler={()=>{}}
+      handleChange={handleChange}
+      expanded={expanded}
       children={
         <Stack spacing={2} direction='column' divider={<Divider orientation='horizontal' flexItem />}>
           { children }

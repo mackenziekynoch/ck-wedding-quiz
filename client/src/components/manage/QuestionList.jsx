@@ -6,7 +6,7 @@ import { addQuestion, removeQuestion } from '../../redux/store.js';
 import Box from '@mui/material/Box';
 import DynamicFormRoundedIcon from '@mui/icons-material/DynamicFormRounded';
 
-import { FullAccordion } from '../common/accordion/FullAccordion.jsx';
+import { AccordianList } from '../common/accordion/AccordianList.jsx';
 import { SpeedDialButton } from '../common/buttons/SpeedDialButton.jsx';
 import { Question } from './Question.jsx';
 
@@ -52,16 +52,14 @@ export const QuestionList = () => {
         noValidate
         autoComplete="off"
       >
-        {Object.entries(questions).map(([questionId, question], i) => (
-          <FullAccordion
-            key={questionId}
-            id={questionId}
-            title={`Question ${i+1}`}
-            showRemove={Object.entries(questions).length > 1}
-            removeHandler={handleRemoveQuestion}
-            children={<Question quizQuestion={question} />}
+        <AccordianList items={Object.entries(questions).map(([questionId, question], i) => ({
+            id: questionId,
+            title: `Question ${i+1}`,
+            showRemove: Object.entries(questions).length > 1,
+            children: <Question quizQuestion={question} />,
+          }))}
+          removeHandler={handleRemoveQuestion}
           />
-        ))}
         <SpeedDialButton
           role='manage question'
           actions={[

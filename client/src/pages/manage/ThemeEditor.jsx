@@ -23,6 +23,12 @@ export const ThemeEditor = (props) => {
   const dispatch = useDispatch();
   const theme = useSelector(state => state.theme.theme);
 
+  const [ expanded, setExpanded ] = React.useState(false);
+
+  const handlePanelChange = (panel) => (event, isExpanded) => {
+    setExpanded(isExpanded ? panel : false);
+  };
+
   const handleBgColorChange = (property, color) => {
     const newTheme = _.cloneDeep(theme);
     _.set(newTheme, ['components', property, 'color'], color);
@@ -67,6 +73,8 @@ export const ThemeEditor = (props) => {
         <Stack sx={{width: 650}}>
           <ThemeFields
             title='Global theme'
+            handleChange={handlePanelChange('Global theme')}
+            expanded={expanded === 'Global theme'}
             bgColor={{
               handler: (color) => {
                 const newTheme = _.cloneDeep(theme);
@@ -78,6 +86,8 @@ export const ThemeEditor = (props) => {
           />
           <ThemeFields
             title='Header theme'
+            handleChange={handlePanelChange('Header theme')}
+            expanded={expanded === 'Header theme'}
             bgColor={{
               handler: (color) => {
                 handleBgColorChange('header', color);
@@ -111,6 +121,8 @@ export const ThemeEditor = (props) => {
           />
           <ThemeFields
             title='Page counter theme'
+            handleChange={handlePanelChange('Page counter theme')}
+            expanded={expanded === 'Page counter theme'}
             bgColor={{
               handler: (color) => {
                 handleBgColorChange('stepper', color)
@@ -135,6 +147,8 @@ export const ThemeEditor = (props) => {
           />
           <ThemeFields
             title='Question title theme'
+            handleChange={handlePanelChange('Question title theme')}
+            expanded={expanded === 'Question title theme'}
             fontColor={{
               handler: (color) => {
                 handleFontColorChange('questionTitle', color)
@@ -150,6 +164,8 @@ export const ThemeEditor = (props) => {
           />
           <ThemeFields
             title='Question options theme'
+            handleChange={handlePanelChange('Question options theme')}
+            expanded={expanded === 'Question options theme'}
             bgColor={{
               handler: (color) => {
                 handleBgColorChange('questionOption', color)
@@ -170,6 +186,8 @@ export const ThemeEditor = (props) => {
             }} />
           <ThemeFields
             title='Question description theme'
+            handleChange={handlePanelChange('Question description theme')}
+            expanded={expanded === 'Question description theme'}
             fontColor={{
               handler: (color) => {
                 handleFontColorChange('questionDescription', color)
@@ -185,6 +203,8 @@ export const ThemeEditor = (props) => {
           />
           <ThemeFields
             title='Next page theme'
+            handleChange={handlePanelChange('Next page theme')}
+            expanded={expanded === 'Next page theme'}
             fontColor={{
               handler: (color) => {
                 handleFontColorChange('nextPage', color)
