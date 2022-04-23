@@ -42,6 +42,21 @@ app.post('/manage/:eventName/files', upload.array('file'), (req, res) => {
   res.status(201).end('file uploaded!')
 });
 
+app.get('/manage/:eventName/files/meta', (req, res) => {
+  const bucketParams = {
+    Bucket: process.env.S3Bucket,
+    Prefix: req.params.eventName,
+  };
+  s3.listObjects(bucketParams, function(err, data) {
+    if (err) {
+      console.log("Error querying event images", err);
+    } else {
+      res.status(200).send(data);
+      console.log("Success querying event images", data);
+    }
+  });
+})
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 });

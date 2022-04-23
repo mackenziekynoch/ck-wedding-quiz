@@ -8,6 +8,8 @@ import { styled } from '@mui/material/styles';
 import FileUploadIcon from '@mui/icons-material/FileUpload';
 import ImageIcon from '@mui/icons-material/Image';
 import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { addImages } from '../../redux/store.js';
 
 const HiddenInput = styled('input')({
   display: 'none'
@@ -35,6 +37,7 @@ export const ImageUpload = (props) => {
   const [imageNames, setImageNames] = React.useState([]);
   const [snackbar, setSnackbar] = React.useState(null);
   const { eventName } = props;
+  const dispatch = useDispatch();
 
   const handleImageDelete = (imageName) => {
     const index = imageNames.indexOf(imageName);
@@ -78,6 +81,7 @@ export const ImageUpload = (props) => {
       )
       .then(res => {
         console.log(`Success ` + res.data);
+        dispatch(addImages(imageNames));
         setSnackbar("success");
       })
       .catch(err => {
@@ -90,7 +94,6 @@ export const ImageUpload = (props) => {
   };
 
   return (
-    // <form method="post" encType="multipart/form-data" action="/manage/files">
     <div>
       <span style={{display: 'block'}}>
         <label htmlFor="contained-button-file">
@@ -113,6 +116,5 @@ export const ImageUpload = (props) => {
         <FailureSnackbar open={true} handleClose={() => setSnackbar(null)} />
       }
     </div>
-    // </form>
   )
 }

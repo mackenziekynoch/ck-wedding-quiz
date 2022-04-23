@@ -1,9 +1,11 @@
 import * as React from 'react';
 import _ from 'lodash';
 import uuid from 'react-uuid'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { updateQuestion } from '../../redux/store.js';
 import TextField from '@mui/material/TextField';
+import Select from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
 import CheckCircleRoundedIcon from '@mui/icons-material/CheckCircleRounded';
 import CheckCircleOutlineRoundedIcon from '@mui/icons-material/CheckCircleOutlineRounded';
 
@@ -16,6 +18,8 @@ export const Question = ({quizQuestion}) => {
   const [description, setDescription] = React.useState(quizQuestion.description);
   const [options, setOptions] = React.useState(quizQuestion.answerOptions);
   const [answer, setAnswer] = React.useState(quizQuestion.answer);
+  const [image, setImage] = React.useState(null);
+  const images = useSelector(state => state.assets.images);
 
   React.useEffect(() => {
     dispatch(updateQuestion({
@@ -100,6 +104,13 @@ export const Question = ({quizQuestion}) => {
         onChange={handleSetDescription}
         defaultValue={description}
       />
+      {images.length > 0 &&
+        <Select>
+          {images.map(image => {
+            <MenuItem key={image}>{image}</MenuItem>
+          })}
+        </Select>
+      }
       <ModifiableInputList
         role='Answer'
         width='50ch'

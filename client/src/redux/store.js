@@ -50,10 +50,25 @@ const eventSlice = createSlice({
 
 export const {updateName} = eventSlice.actions;
 
+const assetSlice = createSlice({
+  name: 'assets',
+  initialState: {
+    images: []
+  },
+  reducers: {
+    addImages: (state, action) => {
+      state.images = [...state.images, ...action.payload];
+    },
+  },
+});
+
+export const {addImages} = assetSlice.actions;
+
 export default configureStore({
   reducer: {
     quiz: quizSlice.reducer,
     theme: themeSlice.reducer,
     event: eventSlice.reducer,
+    assets: assetSlice.reducer,
   },
 });
