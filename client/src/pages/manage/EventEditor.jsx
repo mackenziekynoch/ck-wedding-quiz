@@ -4,6 +4,8 @@ import TextField from '@mui/material/TextField';
 import { useSelector, useDispatch } from 'react-redux';
 import { updateName } from '../../redux/store.js';
 
+import { ImageUpload } from '../../components/manage/ImageUpload.jsx';
+
 export const EventEditor = (props) => {
   const dispatch = useDispatch();
   const eventName = useSelector(state => state.event.eventName);
@@ -14,6 +16,7 @@ export const EventEditor = (props) => {
   return (
     <Box>
       <TextField required id='event-name' label='Event Name' value={eventName} fullWidth onChange={handleChange} />
+      <ImageUpload eventName={eventName} />
     </Box>
   );
 }
