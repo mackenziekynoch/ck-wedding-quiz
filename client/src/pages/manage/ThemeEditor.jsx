@@ -20,10 +20,13 @@ const fontSizeOptions = [
 const weightOptions = ['300', '400', '700'];
 
 export const ThemeEditor = (props) => {
+  const { setQuestionPage } = props;
   const dispatch = useDispatch();
   const theme = useSelector(state => state.theme.theme);
 
   const [ expanded, setExpanded ] = React.useState(false);
+
+  React.useEffect(() => setQuestionPage(1), [])
 
   const handlePanelChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
