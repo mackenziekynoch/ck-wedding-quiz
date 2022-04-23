@@ -16,8 +16,12 @@ export const Quiz = (props) => {
   const { editMode, ...other } = props;
   const quiz = useSelector((state) => state.quiz.quiz);
   const eventName = useSelector(state => state.event.eventName);
-  const [activeStep, setActiveStep] = React.useState(0);
+  const [activeStep, setActiveStep] = React.useState(other?.viewPage === undefined ? 0 : other.viewPage);
   const [status, setStatus] = React.useState(null);
+
+  React.useEffect(() => {
+    setActiveStep(other.viewPage);
+  },  [other.viewPage]);
 
   const handlePageChange = (pageNumber) => {
     setActiveStep(pageNumber);
@@ -33,6 +37,7 @@ export const Quiz = (props) => {
       <PageStepper
         stepCount={Object.keys(quiz).length}
         handleStep={handlePageChange}
+        activeStep={activeStep}
         editMode={editMode}
         page={activeStep === Object.keys(quiz).length ? (
           <Box sx={{width: '100%'}}>

@@ -66,21 +66,19 @@ const NextButton = styled(Button)(({theme}) => ({
 }));
 
 export const PageStepper = (props) => {
-  const { stepCount, handleStep, page, editMode = false, ...other } = props;
+  const { stepCount, handleStep, page, editMode = false, activeStep, ...other } = props;
   const theme = useSelector(state => state.theme.theme);
   const iconName = _.get(theme, ['components', 'stepper', 'icon']);
   const steps = [...Array(stepCount).keys()];
-  const [activeStep, setActiveStep] = React.useState(0);
 
-  React.useEffect(() => handleStep(activeStep), [activeStep]);
   const handleNext = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    handleStep(activeStep + 1);
   };
   const handleBack = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep - 1);
+    handleStep(activeStep - 1);
   };
   const handleReset = () => {
-    setActiveStep(0);
+    handleStep(0);
   };
 
   return (

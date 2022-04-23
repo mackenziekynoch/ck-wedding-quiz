@@ -4,11 +4,12 @@ import { FullAccordion } from './FullAccordion.jsx';
 
 
 export const AccordianList = (props) => {
-  const { items, ...other } = props;
+  const { items, onOpenPanel, ...other } = props;
   const [ expanded, setExpanded ] = React.useState(false);
 
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
+    onOpenPanel(panel);
   };
 
   return (

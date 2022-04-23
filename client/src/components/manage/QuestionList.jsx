@@ -10,7 +10,8 @@ import { AccordianList } from '../common/accordion/AccordianList.jsx';
 import { SpeedDialButton } from '../common/buttons/SpeedDialButton.jsx';
 import { Question } from './Question.jsx';
 
-export const QuestionList = () => {
+export const QuestionList = (props) => {
+  const { setQuestionPage } = props;
   const dispatch = useDispatch();
   const questions = useSelector(state => state.quiz.quiz);
 
@@ -40,6 +41,11 @@ export const QuestionList = () => {
     dispatch(removeQuestion({id: targetId}));
   };
 
+  const handlePanelChange = (id) => {
+    const index = Object.keys(questions).indexOf(id)
+    setQuestionPage(index);
+  }
+
   return (
       <Box
         component="form"
@@ -59,6 +65,7 @@ export const QuestionList = () => {
             children: <Question quizQuestion={question} />,
           }))}
           removeHandler={handleRemoveQuestion}
+          onOpenPanel={handlePanelChange}
           />
         <SpeedDialButton
           role='manage question'

@@ -9,7 +9,7 @@ export const PreviewQuiz = (props) => {
   return (
     <IPhone8
       sx={{ order: 2, alignItems: 'flex-end', marginLeft: 5 }}
-      children={<Quiz quiz={quiz} editMode={props.editMode} />}
+      children={<Quiz quiz={quiz} editMode={props.editMode} viewPage={props.questionPage} />}
     />
   )
 };

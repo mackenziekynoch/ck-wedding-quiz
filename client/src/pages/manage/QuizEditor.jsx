@@ -13,6 +13,8 @@ import { PreviewQuiz } from '../../components/manage/PreviewQuiz.jsx';
 
 export const QuizEditor = () => {
   const theme = useSelector(state => state.theme.theme);
+  const [questionPage, setQuestionPage] = React.useState(0);
+
   return (
     <Container maxWidth='xl'>
       <Grid container spacing={2}>
@@ -24,14 +26,14 @@ export const QuizEditor = () => {
             tabList={['Event Details', 'Quiz Questions', 'Look & Feel']}
             childrenList={[
               <EventEditor />,
-              <QuestionEditor />,
-              <ThemeEditor />,
+              <QuestionEditor setQuestionPage={setQuestionPage} />,
+              <ThemeEditor setQuestionPage={setQuestionPage} />,
             ]}
           />
         </Grid>
         <Grid item xs={4}>
           <ThemeProvider theme={createTheme(theme)}>
-            <PreviewQuiz editMode={true} />
+            <PreviewQuiz questionPage={questionPage} editMode={true} />
           </ThemeProvider>
         </Grid>
       </Grid>
