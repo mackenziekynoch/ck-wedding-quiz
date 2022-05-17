@@ -3,7 +3,8 @@ import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import { TabList } from '../../components/common/tabs/TabList.jsx';
 
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchImagesByEvent } from '../../redux/store.js';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 
 import { QuestionEditor } from './QuestionEditor.jsx';
@@ -12,8 +13,12 @@ import { EventEditor } from './EventEditor.jsx';
 import { PreviewQuiz } from '../../components/manage/PreviewQuiz.jsx';
 
 export const QuizEditor = () => {
+  const dispatch = useDispatch();
   const theme = useSelector(state => state.theme.theme);
+  const eventName = useSelector(state => state.event.eventName);
   const [questionPage, setQuestionPage] = React.useState(0);
+
+  dispatch(fetchImagesByEvent(eventName));
 
   return (
     <Container maxWidth='xl'>

@@ -1,6 +1,8 @@
-import { configureStore, createSlice } from '@reduxjs/toolkit'
+import { configureStore, createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import data from '../../../database/mock_data.json';
 import { defaultThemeObject } from '../../assets/defaultTheme';
+import axios from 'axios';
+import 'regenerator-runtime/runtime'
 
 const quizSlice = createSlice({
   name: 'quiz',
@@ -50,6 +52,14 @@ const eventSlice = createSlice({
 
 export const {updateName} = eventSlice.actions;
 
+export const fetchImagesByEvent = createAsyncThunk(
+  'assets/images',
+  async (eventName, thunkAPI) => {
+    const response = await axios.get(`manage/${eventName}/files/meta`)
+    return response.data.Contents
+  }
+)
+
 const assetSlice = createSlice({
   name: 'assets',
   initialState: {
@@ -59,6 +69,11 @@ const assetSlice = createSlice({
     addImages: (state, action) => {
       state.images = [...state.images, ...action.payload];
     },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(fetchImagesByEvent.fulfilled, (state, action) => {
+      state.images = action.payload;
+    })
   },
 });
 

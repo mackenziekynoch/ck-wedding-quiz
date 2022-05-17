@@ -5,7 +5,6 @@ import MenuItem from '@mui/material/MenuItem';
 export const StatefulSelect = (props) => {
   const { defaultValue, label, options, handler } = props;
   const [value, setValue] = React.useState(defaultValue);
-
   return (
     <Select
       labelId={label}

@@ -4,13 +4,17 @@ import uuid from 'react-uuid'
 import { useDispatch, useSelector } from 'react-redux';
 import { updateQuestion } from '../../redux/store.js';
 import TextField from '@mui/material/TextField';
-import Select from '@mui/material/Select';
-import MenuItem from '@mui/material/MenuItem';
+import FormGroup from '@mui/material/FormGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
+import Box from '@mui/material/Box';
 import CheckCircleRoundedIcon from '@mui/icons-material/CheckCircleRounded';
 import CheckCircleOutlineRoundedIcon from '@mui/icons-material/CheckCircleOutlineRounded';
 
 import { ModifiableInputList } from '../common/fields/ModifiableInputList.jsx';
 import { StatusToggleButton } from '../common/buttons/StatusToggleButton.jsx';
+import { StatefulSelect } from '../common/select/StatefulSelect.jsx';
+import { LabeledSlider } from '../common/slider/LabeledSlider.jsx';
 
 export const Question = ({quizQuestion}) => {
   const dispatch = useDispatch();
@@ -18,8 +22,9 @@ export const Question = ({quizQuestion}) => {
   const [description, setDescription] = React.useState(quizQuestion.description);
   const [options, setOptions] = React.useState(quizQuestion.answerOptions);
   const [answer, setAnswer] = React.useState(quizQuestion.answer);
-  const [image, setImage] = React.useState(null);
   const images = useSelector(state => state.assets.images);
+  const [useImages, setUseImages] = React.useState(false);
+  const [image, setImage] = React.useState(null);
 
   React.useEffect(() => {
     dispatch(updateQuestion({
@@ -27,9 +32,10 @@ export const Question = ({quizQuestion}) => {
       question: question,
       description: description,
       answerOptions: options,
-      answer: answer
+      answer: answer,
+      image: image,
     }));
-  }, [options, question, description, answer]);
+  }, [options, question, description, answer, image]);
 
   const addQuestionOption = () => {
     const newOption = {id: uuid(), value: 'placeholder'};
@@ -104,12 +110,26 @@ export const Question = ({quizQuestion}) => {
         onChange={handleSetDescription}
         defaultValue={description}
       />
-      {images.length > 0 &&
-        <Select>
-          {images.map(image => {
-            <MenuItem key={image}>{image}</MenuItem>
-          })}
-        </Select>
+      <FormGroup>
+        <FormControlLabel control={<Checkbox checked={useImages} onChange={() => {
+          setUseImages(!useImages);
+          if (image === null) {
+            setImage(images[0].Key);
+          } else {
+            setImage(null);
+          }
+        }} />} label="Include Image" />
+      </FormGroup>
+      {useImages &&
+        <Box sx={{mb: 2}}>
+          <StatefulSelect
+            label={"Image"}
+            defaultValue={image}
+            handler={setImage}
+            options={images.map(image => ({value: image.Key, visual: image.Key.split("/")[1]}))}
+          />
+
+        </Box>
       }
       <ModifiableInputList
         role='Answer'

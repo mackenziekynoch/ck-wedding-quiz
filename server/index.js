@@ -17,6 +17,36 @@ const port = 3000;
 
 app.use(express.static('client/public'));
 
+app.get('/manage/:eventName/files/meta', (req, res) => {
+  const bucketParams = {
+    Bucket: process.env.S3Bucket,
+    Prefix: req.params.eventName,
+  };
+  s3.listObjects(bucketParams, function(err, data) {
+    if (err) {
+      console.log("Error querying event images", err);
+    } else {
+      res.status(200).send(data);
+      console.log("Success querying event images", data);
+    }
+  });
+});
+
+app.get('/manage/:eventName/files/:fileName', (req, res) => {
+  const bucketParams = {
+    Bucket: process.env.S3Bucket,
+    Key: `${req.params.eventName}/${req.params.fileName}`,
+  };
+  s3.getObject(bucketParams, (err, data) => {
+    if (err) {
+      console.log("Error retrieving image", req.params.fileName, err);
+    } else {
+      res.status(200).send(data.Body);
+      console.log("Success retrieving image", req.params.fileName);
+    }
+  });
+});
+
 app.get('*', (req, res) =>{
   res.sendFile(path.resolve('client/public/index.html'));
 });
@@ -41,21 +71,6 @@ app.post('/manage/:eventName/files', upload.array('file'), (req, res) => {
   console.log(`saving ${req.files.length} images for event ${req.params.eventName}`)
   res.status(201).end('file uploaded!')
 });
-
-app.get('/manage/:eventName/files/meta', (req, res) => {
-  const bucketParams = {
-    Bucket: process.env.S3Bucket,
-    Prefix: req.params.eventName,
-  };
-  s3.listObjects(bucketParams, function(err, data) {
-    if (err) {
-      console.log("Error querying event images", err);
-    } else {
-      res.status(200).send(data);
-      console.log("Success querying event images", data);
-    }
-  });
-})
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)

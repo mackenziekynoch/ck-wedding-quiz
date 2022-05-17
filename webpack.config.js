@@ -3,7 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   mode: 'development',
-  entry: path.resolve(__dirname, 'client/src/index.js'),
+  entry: ["regenerator-runtime/runtime.js", path.resolve(__dirname, 'client/src/index.js')],
   output: {
     path: path.resolve(__dirname, 'client/public'),
     filename: 'bundle.js'

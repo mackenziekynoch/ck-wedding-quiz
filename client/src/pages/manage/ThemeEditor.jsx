@@ -149,6 +149,35 @@ export const ThemeEditor = (props) => {
             }}
           />
           <ThemeFields
+            title='Image dimensions'
+            handleChange={handlePanelChange('Image dimensions')}
+            expanded={expanded === 'Image dimensions'}
+            boxHeight={{
+              handler: (value) => {
+                handleDimensionChange('boxHeight', value * 18);
+              },
+              defaultValue: _.get(theme, ['components', 'imageDimensions', 'boxHeight']) || 180
+            }}
+            boxWidth={{
+              handler: (value) => {
+                handleDimensionChange('boxWidth', value);
+              },
+              defaultValue: _.get(theme, ['components', 'imageDimensions', 'boxWidth']) || '100%'
+            }}
+            imageHeight={{
+              handler: (value) => {
+                handleDimensionChange('imageHeight', value);
+              },
+              defaultValue: _.get(theme, ['components', 'imageDimensions', 'imageHeight']) || '100%'
+            }}
+            imageWidth={{
+              handler: (value) => {
+                handleDimensionChange('imageWidth', value);
+              },
+              defaultValue: _.get(theme, ['components', 'imageDimensions', 'imageWidth']) || '100%'
+            }}
+          />
+          <ThemeFields
             title='Question title theme'
             handleChange={handlePanelChange('Question title theme')}
             expanded={expanded === 'Question title theme'}

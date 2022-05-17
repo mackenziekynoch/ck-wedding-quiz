@@ -76,6 +76,54 @@ export const ThemeFields = (props) => {
       />
     )
   }
+  if (other?.boxHeight !== undefined) {
+    children.push(
+      <StepSlider
+        defaultValue={other.boxHeight.defaultValue}
+        title={`${title} box height`}
+        key={`${title}-box-height`}
+        handleChange={other.boxHeight.handler}
+        min={0}
+        max={10}
+      />
+    )
+  }
+  if (other?.boxWidth !== undefined) {
+    children.push(
+      <StepSlider
+        defaultValue={other.boxWidth.defaultValue}
+        title={`${title} box height`}
+        key={`${title}-box-height`}
+        handleChange={other.boxWidth.handler}
+        min={0}
+        max={10}
+      />
+    )
+  }
+  if (other?.imageHeight !== undefined) {
+    children.push(
+      <StepSlider
+        defaultValue={other.imageHeight.defaultValue}
+        title={`${title} box height`}
+        key={`${title}-box-height`}
+        handleChange={other.imageHeight.handler}
+        min={0}
+        max={10}
+      />
+    )
+  }
+  if (other?.imageWidth !== undefined) {
+    children.push(
+      <StepSlider
+        defaultValue={other.imageWidth.defaultValue}
+        title={`${title} box height`}
+        key={`${title}-box-height`}
+        handleChange={other.imageWidth.handler}
+        min={0}
+        max={10}
+      />
+    )
+  }
   return (
     <FullAccordion
       key={title}

@@ -4,6 +4,8 @@ import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import Card from '@mui/material/Card';
+import CardMedia from '@mui/material/CardMedia';
 
 const QuestionTitle = styled(Typography)(({theme}) => ({
   color: theme?.components?.questionTitle?.fontColor || theme.palette.text.primary,
@@ -39,7 +41,17 @@ export const Question = (props) => {
   }, [question]);
 
   return (
-    <Box sx={{ width: '100%' }}>
+    <Box sx={{ width: '100%', paddingTop: 2 }}>
+      {question.image &&
+        <Card sx={{ width: '80%', maxHeight: 180, margin: 'auto'}}>
+          <CardMedia
+            sx={{width: '80%', height: '100%', margin: 'auto'}}
+            component='img'
+            image={`/manage/${question.image.split("/")[0]}/files/${question.image.split("/")[1]}`}
+            alt={question.image}
+          />
+        </Card>
+      }
       <QuestionTitle sx={{ marginTop: 2, marginLeft: 2, marginBottom: 2 }} variant='h6'>{question.question}</QuestionTitle>
       <Stack spacing={2} alignItems="normal" justifyContent="flex-start">
         {question.answerOptions.map(option => (
