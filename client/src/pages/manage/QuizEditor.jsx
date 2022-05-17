@@ -8,7 +8,8 @@ import { fetchImagesByEvent } from '../../redux/store.js';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 
 import { QuestionEditor } from './QuestionEditor.jsx';
-import { ThemeEditor } from './ThemeEditor.jsx';
+// import { ThemeEditor } from './ThemeEditor.jsx';
+import { ThemeEditor } from './ThemeEditor2.jsx';
 import { EventEditor } from './EventEditor.jsx';
 import { PreviewQuiz } from '../../components/manage/PreviewQuiz.jsx';
 

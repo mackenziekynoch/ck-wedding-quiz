@@ -26,10 +26,13 @@ const closeButtonStyle = {
 };
 
 export const ButtonModal = (props) => {
-  const { buttonText, title, description, children } = props;
+  const { buttonText, title, description, children, onClose = () => {} } = props;
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const handleClose = () => {
+    setOpen(false);
+    onClose(false);
+  };
 
   return (
     <div>
