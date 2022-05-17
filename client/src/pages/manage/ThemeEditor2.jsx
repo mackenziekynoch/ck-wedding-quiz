@@ -1,10 +1,13 @@
 import * as React from 'react';
+import _ from 'lodash';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import { styled } from '@mui/material/styles';
+import { useSelector, useDispatch } from 'react-redux';
+import { updateTheme } from '../../redux/store.js';
 import PublicIcon from '@mui/icons-material/Public';
 import TitleIcon from '@mui/icons-material/Title';
 import RedoIcon from '@mui/icons-material/Redo';
@@ -25,64 +28,68 @@ import { TooltipIconButton } from '../../components/common/buttons/TooltipIconBu
 import { JustModal } from '../../components/common/modal/JustModal.jsx';
 
 
-const globalEditFields = (
+const GlobalEditFields = ({defaults}) => (
   <Box>
     <TargetColorPicker
       key='bg-color-global'
-      // defaultValue={other.bgColor.defaultValue}
+      defaultValue={defaults.bg.value}
       title={`global background color`}
-      // handleColorChange={other.bgColor.handler}
+      handleColorChange={defaults.bg.handler}
     />
-    <TargetColorPicker
+    {/* <TargetColorPicker
       key='font-color-global'
-      // defaultValue={other.bgColor.defaultValue}
+      defaultValue={defaults.fc.value}
       title={`global font color`}
-      // handleColorChange={other.bgColor.handler}
-    />
+      handleColorChange={defaults.fc.handler}
+    /> */}
   </Box>
 );
 
-const headerEditFields = (
+const HeaderEditFields = ({defaults}) => (
   <Box>
     <TargetColorPicker
       key='bg-color-header'
+      defaultValue={defaults.bg.value}
       title={`header background color`}
+      handleColorChange={defaults.bg.handler}
     />
     <TargetColorPicker
       key='font-color-header'
+      defaultValue={defaults.fc.value}
       title={`header font color`}
+      handleColorChange={defaults.fc.handler}
     />
     <StepSlider
-        // defaultValue={other.fontSize.defaultValue}
-        title={`header font size`}
-        key={`header-font-size`}
-        // handleChange={other.fontSize.handler}
-        min={1}
-        max={7}
-      />
-      <AlignTextButtons
-        key={`header-align-items`}
-        // handleChange={other.align.handler}
-        // defaultValue={other.align.defaultValue}
-      />
-      <StepSlider
-        // defaultValue={other.fontWeight.defaultValue}
-        title={`header font weight`}
-        key={`header-font-weight`}
-        // handleChange={other.fontWeight.handler}
-        min={1}
-        max={3}
-      />
+        defaultValue={defaults.fs.value}
+      title={`header font size`}
+      key={`header-font-size`}
+      handleChange={defaults.fs.handler}
+      min={1}
+      max={7}
+    />
+    <AlignTextButtons
+      key={`header-align-items`}
+      handleChange={defaults.align.handler}
+      defaultValue={defaults.align.value}
+    />
+    <StepSlider
+      defaultValue={defaults.fw.value}
+      title={`header font weight`}
+      key={`header-font-weight`}
+      handleChange={defaults.fw.handler}
+      min={1}
+      max={3}
+    />
   </Box>
 );
 
-const pageCounterEditFields = (
+const PageCounterEditFields = ({defaults}) => (
   <Box>
     <TargetColorPicker
       key='counter color'
-      // defaultValue={other.bgColor.defaultValue}
+      defaultValue={defaults.bg.value}
       title={`page counter color`}
-      // handleColorChange={other.bgColor.handler}
+      handleColorChange={defaults.bg.handler}
     />
     <StatefulSelect
         key='select counter'
@@ -97,72 +104,65 @@ const pageCounterEditFields = (
           {value: 'love', visual: <FavoriteIcon />},
         ]}
         defaultValue='default'
-        // handler={other.select.handler}
+        handler={defaults.select.handler}
       />
   </Box>
 );
 
-const imageEditFields = (
+const ImageEditFields = ({defaults}) => (
   <Box>
     <StepSlider
-        // defaultValue={other.boxHeight.defaultValue}
+        defaultValue={defaults.bh.value}
         title={`image box height`}
         key={`image-box-height`}
-        // handleChange={other.boxHeight.handler}
+        handleChange={defaults.bh.handler}
         min={0}
         max={10}
       />
     <StepSlider
-        // defaultValue={other.boxHeight.defaultValue}
+        defaultValue={defaults.bw.value}
         title={`image box width`}
         key={`image-box-width`}
-        // handleChange={other.boxHeight.handler}
+        handleChange={defaults.bw.handler}
         min={0}
         max={10}
       />
     <StepSlider
-        // defaultValue={other.boxHeight.defaultValue}
+        defaultValue={defaults.ih.value}
         title={`image height`}
         key={`image-height`}
-        // handleChange={other.boxHeight.handler}
+        handleChange={defaults.ih.handler}
         min={0}
         max={10}
       />
     <StepSlider
-        // defaultValue={other.boxHeight.defaultValue}
+        defaultValue={defaults.iw.value}
         title={`image width`}
         key={`image-width`}
-        // handleChange={other.boxHeight.handler}
+        handleChange={defaults.iw.handler}
         min={0}
         max={10}
       />
   </Box>
 );
 
-const questionOptionFields = (
+const QuestionOptionFields = ({defaults}) => (
   <Box>
     <TargetColorPicker
       key='bg-color-option'
-      // defaultValue={other.bgColor.defaultValue}
+      defaultValue={defaults.bg.value}
       title={`option background color`}
-      // handleColorChange={other.bgColor.handler}
+      handleColorChange={defaults.bg.handler}
     />
     <TargetColorPicker
       key='font-color-option'
-      // defaultValue={other.bgColor.defaultValue}
+      defaultValue={defaults.fc.value}
       title={`option font color`}
-      // handleColorChange={other.bgColor.handler}
+      handleColorChange={defaults.fc.handler}
     />
   </Box>
 );
 
-const editFields = [
-  {title: "Global Theme", component: globalEditFields, icon: <PublicIcon />},
-  {title: "Header Theme", component: headerEditFields, icon: <TitleIcon />},
-  {title: "Page Stepper", component: pageCounterEditFields, icon: <RedoIcon />},
-  {title: "Image Settings", component: imageEditFields, icon: <ImageIcon />},
-  {title: "Question Options", component: questionOptionFields, icon: <ListIcon />},
-];
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -172,16 +172,173 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 
+const fontSizeOptions = [
+  'body1', 'subtitle2', 'subtitle1', 'h6', 'h5', 'h4', 'h3', 'h2'
+];
+const weightOptions = ['300', '400', '700'];
+
 export const ThemeEditor = (props) => {
+  const { setQuestionPage } = props;
+  const theme = useSelector(state => state.theme.theme);
+  const dispatch = useDispatch();
   const [modalContents, setModalContents] = React.useState(null);
 
+  React.useEffect(() => setQuestionPage(1), []);
+
   const handleMenuButtonClick = (contents) => {
-    console.log('setting modal contents', editFields[contents])
     setModalContents(contents);
   };
 
   const handleMenuModalClose = () => {
     setModalContents(null);
+  };
+
+  const editFields = [
+    {
+      title: "Global Theme",
+      component: <GlobalEditFields defaults={{
+        bg: {
+          value: _.get(theme, ['palette', 'primary', 'main']),
+          handler: (color) => {
+            const newTheme = _.cloneDeep(theme);
+            _.set(newTheme, ['palette', 'primary', 'main'], color);
+            dispatch(updateTheme(newTheme));
+          }
+        }
+      }}/>,
+      icon: <PublicIcon />
+    },
+    {
+      title: "Header Theme",
+      component: <HeaderEditFields defaults={{
+        bg: {
+          value:  _.get(theme, ['components', 'header', 'color']) || _.get(theme, ['palette', 'primary', 'main']),
+          handler: (color) => {
+            handleBgColorChange('header', color);
+          }
+        },
+        fc: {
+          value: _.get(theme, ['components', 'header', 'fontColor']) || _.get(theme, ['palette', 'primary', 'contrastText']),
+          handler: (color) => {
+            handleFontColorChange('header', color)
+          }
+        },
+        fs: {
+          value: fontSizeOptions.indexOf(_.get(theme, ['components', 'header', 'fontSize']) || 'h6'),
+          handler: (size) => {
+            handleFontSizeChange('header', fontSizeOptions[size])
+          }
+        },
+        align: {
+          value: _.get(theme, ['components', 'header', 'alignItems']) || 'start',
+          handler: (alignment) => {
+            handleAlignChange('header', alignment)
+          }
+        },
+        fw: {
+          value: weightOptions.indexOf(_.get(theme, ['components', 'header', 'fontWeight']) || '400') + 1,
+          handler: (weight) => {
+            handleFontWeightChange('header', weight)
+          }
+        }
+      }}/>,
+      icon: <TitleIcon />
+    },
+    {
+      title: "Page Stepper",
+      component: <PageCounterEditFields defaults={{
+        bg: {
+          value: _.get(theme, ['components', 'stepper', 'color']) || _.get(theme, ['palette', 'primary', 'main']),
+          handler: (color) => {
+            handleBgColorChange('stepper', color)
+          }
+        },
+        select: {
+          handler: (value) => {
+            handleSelectChange('stepper', 'icon', value)
+          }
+        }
+      }}/>,
+      icon: <RedoIcon />
+    },
+    {
+      title: "Image Settings",
+      component: <ImageEditFields defaults={{
+        bh: {
+          value: _.get(theme, ['components', 'imageDimensions', 'boxHeight']) || 180,
+          handler: (value) => {
+            handleDimensionChange('boxHeight', value * 18);
+          }
+        },
+        bw: {
+          value: _.get(theme, ['components', 'imageDimensions', 'boxWidth']) || '100%',
+          handler: (value) => {
+            handleDimensionChange('boxWidth', value);
+          }
+        },
+        ih: {
+          value: _.get(theme, ['components', 'imageDimensions', 'imageHeight']) || '100%',
+          handler: (value) => {
+            handleDimensionChange('imageHeight', value);
+          }
+        },
+        iw: {
+          value: _.get(theme, ['components', 'imageDimensions', 'imageWidth']) || '100%',
+          handler: (value) => {
+            handleDimensionChange('imageWidth', value);
+          }
+        }
+      }}/>,
+      icon: <ImageIcon />
+    },
+    {
+      title: "Question Options",
+      component: <QuestionOptionFields defaults={{
+        bg: {
+          value: _.get(theme, ['components', 'questionOption', 'color']) || _.get(theme, ['palette', 'primary', 'main']),
+          handler: (color) => {
+            handleBgColorChange('questionOption', color)
+          }
+        },
+        fc: {
+          value: _.get(theme, ['components', 'questionOption', 'fontColor']) || _.get(theme, ['palette', 'primary', 'contrastText']),
+          handler: (color) => {
+            handleFontColorChange('questionOption', color)
+          }
+        }
+      }}/>,
+      icon: <ListIcon />
+    },
+  ];
+  const handleBgColorChange = (property, color) => {
+    const newTheme = _.cloneDeep(theme);
+    _.set(newTheme, ['components', property, 'color'], color);
+    dispatch(updateTheme(newTheme));
+  };
+  const handleFontColorChange = (property, color) => {
+    const newTheme = _.cloneDeep(theme);
+    _.set(newTheme, ['components', property, 'fontColor'], color);
+    dispatch(updateTheme(newTheme));
+  };
+  const handleFontSizeChange = (property, size) => {
+    const newTheme = _.cloneDeep(theme);
+    _.set(newTheme, ['components', property, 'fontSize'], size);
+    dispatch(updateTheme(newTheme));
+  };
+  const handleSelectChange = (property, target, value) => {
+    const newTheme = _.cloneDeep(theme);
+    _.set(newTheme, ['components', property, target], value);
+    dispatch(updateTheme(newTheme));
+  };
+  const handleAlignChange = (property, alignment) => {
+    const newTheme = _.cloneDeep(theme);
+    _.set(newTheme, ['components', property, 'alignItems'], alignment);
+    dispatch(updateTheme(newTheme));
+  };
+  const handleFontWeightChange = (property, weight) => {
+    const newTheme = _.cloneDeep(theme);
+    _.set(newTheme, ['components', property, 'fontWeight'], weightOptions[weight - 1]);
+    dispatch(updateTheme(newTheme));
   };
 
   return (

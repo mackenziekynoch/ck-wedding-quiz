@@ -27,7 +27,6 @@ const closeButtonStyle = {
 
 export const JustModal = (props) => {
   const { title, description, children, onClose = () => {} } = props;
-  console.log('in just modal', title, children)
   const [open, setOpen] = React.useState(true);
   const handleClose = () => {
     setOpen(false);
