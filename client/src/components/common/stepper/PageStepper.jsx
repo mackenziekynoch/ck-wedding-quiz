@@ -45,11 +45,18 @@ const CustomPageIconRoot = styled('div')(({theme}) => ({
   },
 }));
 
+const ColoredStepDefault = styled(Step)(({ theme }) => ({
+  '& .MuiStepIcon-root': {
+    color: theme?.components?.stepper?.color || theme.palette.primary.main
+  },
+}));
+
 const CustomPageIcon = (props) => {
   const { active, completed, className } = props;
   const theme = useSelector(state => state.theme.theme);
   const iconName = _.get(theme, ['components', 'stepper', 'icon']);
   const iconGenerator = iconOptions[iconName];
+  console.log(CustomPageIconRoot)
   return (
     <CustomPageIconRoot ownerState={{ active }} className={className}>
       {completed ? (
@@ -93,9 +100,9 @@ export const PageStepper = (props) => {
             );
           } else {
             return (
-              <Step key={label}>
-                <StepLabel ></StepLabel>
-              </Step>
+              <ColoredStepDefault key={label}>
+                <StepLabel sx={{color: theme?.components?.stepper?.color || theme.palette.primary.main}} ></StepLabel>
+              </ColoredStepDefault>
             )
           }
         })}

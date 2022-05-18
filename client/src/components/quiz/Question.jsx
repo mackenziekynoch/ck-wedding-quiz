@@ -43,9 +43,9 @@ export const Question = (props) => {
   return (
     <Box sx={{ width: '100%', paddingTop: 2 }}>
       {question.image &&
-        <Card sx={{ width: '80%', maxHeight: 180, margin: 'auto'}}>
+        <Card sx={{ width: '80%', maxHeight: 180, margin: '0 auto'}}>
           <CardMedia
-            sx={{width: '80%', height: '100%', margin: 'auto'}}
+            sx={{width: '80%', height: '100%', margin: '0 auto'}}
             component='img'
             image={`/manage/${question.image.split("/")[0]}/files/${question.image.split("/")[1]}`}
             alt={question.image}

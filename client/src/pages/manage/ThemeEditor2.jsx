@@ -26,6 +26,7 @@ import { AlignTextButtons } from '../../components/manage/AlignTextButtons.jsx';
 import { StatefulSelect } from '../../components/common/select/StatefulSelect.jsx';
 import { TooltipIconButton } from '../../components/common/buttons/TooltipIconButton.jsx';
 import { JustModal } from '../../components/common/modal/JustModal.jsx';
+import { QuizSkeleton } from '../../components/manage/QuizSkeleton.jsx';
 
 
 const GlobalEditFields = ({defaults}) => (
@@ -36,12 +37,6 @@ const GlobalEditFields = ({defaults}) => (
       title={`global background color`}
       handleColorChange={defaults.bg.handler}
     />
-    {/* <TargetColorPicker
-      key='font-color-global'
-      defaultValue={defaults.fc.value}
-      title={`global font color`}
-      handleColorChange={defaults.fc.handler}
-    /> */}
   </Box>
 );
 
@@ -117,7 +112,7 @@ const ImageEditFields = ({defaults}) => (
         key={`image-box-height`}
         handleChange={defaults.bh.handler}
         min={0}
-        max={10}
+        max={4}
       />
     <StepSlider
         defaultValue={defaults.bw.value}
@@ -125,7 +120,7 @@ const ImageEditFields = ({defaults}) => (
         key={`image-box-width`}
         handleChange={defaults.bw.handler}
         min={0}
-        max={10}
+        max={4}
       />
     <StepSlider
         defaultValue={defaults.ih.value}
@@ -133,7 +128,7 @@ const ImageEditFields = ({defaults}) => (
         key={`image-height`}
         handleChange={defaults.ih.handler}
         min={0}
-        max={10}
+        max={4}
       />
     <StepSlider
         defaultValue={defaults.iw.value}
@@ -141,7 +136,7 @@ const ImageEditFields = ({defaults}) => (
         key={`image-width`}
         handleChange={defaults.iw.handler}
         min={0}
-        max={10}
+        max={4}
       />
   </Box>
 );
@@ -176,12 +171,89 @@ const fontSizeOptions = [
   'body1', 'subtitle2', 'subtitle1', 'h6', 'h5', 'h4', 'h3', 'h2'
 ];
 const weightOptions = ['300', '400', '700'];
+const dimensionOptions = ['60%', '70%', '80%', '90%', '100%'];
+const imageBoxHeight = [100, 120, 140, 160, 180];
+const defaultThemes = [
+  {
+    title: 'default',
+    primaryMain: '#1976D2',
+    headerColor: '#1976D2',
+    headerFontColor: '#FFFFFF',
+    pageStepperColor: '#1976D2',
+    questionOptionColor: '#1976D2',
+    questionOptionFontColor: '#FFFFFF',
+  },
+  {
+    title: 'arc',
+    primaryMain: '#373D48',
+    headerColor: '#373D48',
+    headerFontColor: '#FFFFFF',
+    pageStepperColor: '#5294E2',
+    questionOptionColor: '#4A5664',
+    questionOptionFontColor: '#FFFFFF',
+  },
+  {
+    title: 'atomOne',
+    primaryMain: '#121417',
+    headerColor: '#121417',
+    headerFontColor: '#FFFFFF',
+    pageStepperColor: '#98C379',
+    questionOptionColor: '#ABB2BF',
+    questionOptionFontColor: '#2F343D',
+  },
+  {
+    title: 'charity',
+    primaryMain: '#333232',
+    headerColor: '#333232',
+    headerFontColor: '#f4f5f0',
+    pageStepperColor: '#efd213',
+    questionOptionColor: '#59c77f',
+    questionOptionFontColor: '#f4f5f0',
+  },
+  {
+    title: 'codeMash',
+    primaryMain: '#0c84a9',
+    headerColor: '#f67f01',
+    headerFontColor: '#FFFFFF',
+    pageStepperColor: '#94C53C',
+    questionOptionColor: '#0c84a9',
+    questionOptionFontColor: '#FFFFFF',
+  },
+  {
+    title: 'forest',
+    primaryMain: '#033313',
+    headerColor: '#077a07',
+    headerFontColor: '#FFFFFF',
+    pageStepperColor: '#02ad44',
+    questionOptionColor: '#033313',
+    questionOptionFontColor: '#FFFFFF',
+  },
+  {
+    title: 'kawaii',
+    primaryMain: '#FBFBFB',
+    headerColor: '#F9C6D6',
+    headerFontColor: '#000000',
+    pageStepperColor: '#5D5759',
+    questionOptionColor: '#FBFBFB',
+    questionOptionFontColor: '#000000',
+  },
+  {
+    title: 'kimbie',
+    primaryMain: '#F3E3CD',
+    headerColor: '#F9C6D6',
+    headerFontColor: '#000000',
+    pageStepperColor: '#F3951D',
+    questionOptionColor: '#F3E3CD',
+    questionOptionFontColor: '#000000',
+  },
+]
 
 export const ThemeEditor = (props) => {
   const { setQuestionPage } = props;
   const theme = useSelector(state => state.theme.theme);
   const dispatch = useDispatch();
   const [modalContents, setModalContents] = React.useState(null);
+  const [defaultThemeSelected, setDefaultThemeSelected] = React.useState('default');
 
   React.useEffect(() => setQuestionPage(1), []);
 
@@ -265,25 +337,25 @@ export const ThemeEditor = (props) => {
       title: "Image Settings",
       component: <ImageEditFields defaults={{
         bh: {
-          value: _.get(theme, ['components', 'imageDimensions', 'boxHeight']) || 180,
+          value: imageBoxHeight.indexOf(_.get(theme, ['components', 'imageDimensions', 'boxHeight'])) || 120,
           handler: (value) => {
-            handleDimensionChange('boxHeight', value * 18);
+            handleImageBoxHeightChange(value);
           }
         },
         bw: {
-          value: _.get(theme, ['components', 'imageDimensions', 'boxWidth']) || '100%',
+          value: dimensionOptions.indexOf(_.get(theme, ['components', 'imageDimensions', 'boxWidth'])) || '100%',
           handler: (value) => {
             handleDimensionChange('boxWidth', value);
           }
         },
         ih: {
-          value: _.get(theme, ['components', 'imageDimensions', 'imageHeight']) || '100%',
+          value: dimensionOptions.indexOf(_.get(theme, ['components', 'imageDimensions', 'imageHeight'])) || '100%',
           handler: (value) => {
             handleDimensionChange('imageHeight', value);
           }
         },
         iw: {
-          value: _.get(theme, ['components', 'imageDimensions', 'imageWidth']) || '100%',
+          value: dimensionOptions.indexOf(_.get(theme, ['components', 'imageDimensions', 'imageWidth'])) || '100%',
           handler: (value) => {
             handleDimensionChange('imageWidth', value);
           }
@@ -314,11 +386,13 @@ export const ThemeEditor = (props) => {
     const newTheme = _.cloneDeep(theme);
     _.set(newTheme, ['components', property, 'color'], color);
     dispatch(updateTheme(newTheme));
+    setDefaultThemeSelected(null);
   };
   const handleFontColorChange = (property, color) => {
     const newTheme = _.cloneDeep(theme);
     _.set(newTheme, ['components', property, 'fontColor'], color);
     dispatch(updateTheme(newTheme));
+    setDefaultThemeSelected(null);
   };
   const handleFontSizeChange = (property, size) => {
     const newTheme = _.cloneDeep(theme);
@@ -340,6 +414,26 @@ export const ThemeEditor = (props) => {
     _.set(newTheme, ['components', property, 'fontWeight'], weightOptions[weight - 1]);
     dispatch(updateTheme(newTheme));
   };
+  const handleDimensionChange = (target, value) => {
+    const newTheme = _.cloneDeep(theme);
+    _.set(newTheme, ['components', 'images', target], dimensionOptions[value]);
+  };
+  const handleImageBoxHeightChange = (value) => {
+    const newTheme = _.cloneDeep(theme);
+    _.set(newTheme, ['components', 'images', 'boxHeight'], imageBoxHeight[value]);
+  };
+
+  const handleDefaultThemeSelect = (title) => {
+    const theme = defaultThemes.find(element => element.title === title);
+    const newTheme = _.cloneDeep(theme);
+    _.set(newTheme, ['components', 'header', 'color'], theme.headerColor);
+    _.set(newTheme, ['components', 'header', 'fontColor'], theme.headerFontColor);
+    _.set(newTheme, ['components', 'stepper', 'color'], theme.pageStepperColor);
+    _.set(newTheme, ['components', 'questionOption', 'color'], theme.questionOptionColor);
+    _.set(newTheme, ['components', 'questionOption', 'fontColor'], theme.questionOptionFontColor);
+    dispatch(updateTheme(newTheme));
+    setDefaultThemeSelected(title);
+  };
 
   return (
     <Grid sx={{ flexGrow: 1 }} container spacing={2}>
@@ -360,17 +454,9 @@ export const ThemeEditor = (props) => {
       </Grid>
       <Grid item xs={11}>
         <Grid container justifyContent='center' spacing={1}>
-          <Grid item xs={11}><Typography ml={4}>Default Themes</Typography></Grid>
-          {[0, 1, 2, 3, 4, 5, 6, 7].map((value) => (
-              <Grid key={value} item>
-                <Paper
-                  sx={{
-                    height: 120,
-                    width: 120,
-                    backgroundColor: (theme) =>
-                      theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-                  }}
-                />
+          {defaultThemes.map((value) => (
+              <Grid key={value.title} item>
+                <QuizSkeleton {...value} checked={defaultThemeSelected} onChange={handleDefaultThemeSelect} />
               </Grid>
             ))}
         </Grid>
