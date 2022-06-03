@@ -150,6 +150,12 @@ const QuestionOptionFields = ({defaults}) => (
       handleColorChange={defaults.bg.handler}
     />
     <TargetColorPicker
+      key='bg-hover-color-option'
+      defaultValue={defaults.bgh.value}
+      title={`option background color on hover`}
+      handleColorChange={defaults.bgh.handler}
+    />
+    <TargetColorPicker
       key='font-color-option'
       defaultValue={defaults.fc.value}
       title={`option font color`}
@@ -181,6 +187,7 @@ const defaultThemes = [
     headerFontColor: '#FFFFFF',
     pageStepperColor: '#1976D2',
     questionOptionColor: '#1976D2',
+    questionOptionHoverColor: '#1565c0',
     questionOptionFontColor: '#FFFFFF',
   },
   {
@@ -190,6 +197,7 @@ const defaultThemes = [
     headerFontColor: '#FFFFFF',
     pageStepperColor: '#5294E2',
     questionOptionColor: '#4A5664',
+    questionOptionHoverColor: '#303641',
     questionOptionFontColor: '#FFFFFF',
   },
   {
@@ -199,6 +207,7 @@ const defaultThemes = [
     headerFontColor: '#FFFFFF',
     pageStepperColor: '#98C379',
     questionOptionColor: '#ABB2BF',
+    questionOptionHoverColor: '#98C379',
     questionOptionFontColor: '#2F343D',
   },
   {
@@ -208,6 +217,7 @@ const defaultThemes = [
     headerFontColor: '#f4f5f0',
     pageStepperColor: '#efd213',
     questionOptionColor: '#59c77f',
+    questionOptionHoverColor: '#333232',
     questionOptionFontColor: '#f4f5f0',
   },
   {
@@ -217,6 +227,7 @@ const defaultThemes = [
     headerFontColor: '#FFFFFF',
     pageStepperColor: '#94C53C',
     questionOptionColor: '#0c84a9',
+    questionOptionHoverColor: '#f67f01',
     questionOptionFontColor: '#FFFFFF',
   },
   {
@@ -226,6 +237,7 @@ const defaultThemes = [
     headerFontColor: '#FFFFFF',
     pageStepperColor: '#02ad44',
     questionOptionColor: '#033313',
+    questionOptionHoverColor: '#78AF8F',
     questionOptionFontColor: '#FFFFFF',
   },
   {
@@ -235,6 +247,7 @@ const defaultThemes = [
     headerFontColor: '#000000',
     pageStepperColor: '#5D5759',
     questionOptionColor: '#FBFBFB',
+    questionOptionHoverColor: '#F0A2B8',
     questionOptionFontColor: '#000000',
   },
   {
@@ -244,7 +257,28 @@ const defaultThemes = [
     headerFontColor: '#000000',
     pageStepperColor: '#F3951D',
     questionOptionColor: '#F3E3CD',
+    questionOptionHoverColor: '#DA3D61',
     questionOptionFontColor: '#000000',
+  },
+  {
+    title: 'latte',
+    primaryMain: '#C17F46',
+    headerColor: '#DCBF98',
+    headerFontColor: '#FFFFFF',
+    pageStepperColor: '#DCBF98',
+    questionOptionColor: '#C17F46',
+    questionOptionHoverColor: '#CFA677',
+    questionOptionFontColor: '#FBEDD4',
+  },
+  {
+    title: 'oatLatte',
+    primaryMain: '#ebe5da',
+    headerColor: '#d6b498',
+    headerFontColor: '#c2804a',
+    pageStepperColor: '#c2804a',
+    questionOptionColor: '#ebe5da',
+    questionOptionHoverColor: '#d6b498',
+    questionOptionFontColor: '#c2804a',
   },
 ]
 
@@ -372,6 +406,12 @@ export const ThemeEditor = (props) => {
             handleBgColorChange('questionOption', color)
           }
         },
+        bgh: {
+          value: _.get(theme, ['components', 'questionOption', 'hoverColor']) || _.get(theme, ['palette', 'primary', 'dark']),
+          handler: (color) => {
+            handleBgHoverColorChange('questionOption', color)
+          }
+        },
         fc: {
           value: _.get(theme, ['components', 'questionOption', 'fontColor']) || _.get(theme, ['palette', 'primary', 'contrastText']),
           handler: (color) => {
@@ -385,6 +425,12 @@ export const ThemeEditor = (props) => {
   const handleBgColorChange = (property, color) => {
     const newTheme = _.cloneDeep(theme);
     _.set(newTheme, ['components', property, 'color'], color);
+    dispatch(updateTheme(newTheme));
+    setDefaultThemeSelected(null);
+  };
+  const handleBgHoverColorChange = (property, color) => {
+    const newTheme = _.cloneDeep(theme);
+    _.set(newTheme, ['components', property, 'hoverColor'], color);
     dispatch(updateTheme(newTheme));
     setDefaultThemeSelected(null);
   };
@@ -431,6 +477,7 @@ export const ThemeEditor = (props) => {
     _.set(newTheme, ['components', 'stepper', 'color'], theme.pageStepperColor);
     _.set(newTheme, ['components', 'questionOption', 'color'], theme.questionOptionColor);
     _.set(newTheme, ['components', 'questionOption', 'fontColor'], theme.questionOptionFontColor);
+    _.set(newTheme, ['components', 'questionOption', 'hoverColor'], theme.questionOptionHoverColor);
     dispatch(updateTheme(newTheme));
     setDefaultThemeSelected(title);
   };

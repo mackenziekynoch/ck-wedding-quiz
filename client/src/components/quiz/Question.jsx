@@ -16,6 +16,9 @@ const QuestionOption = styled(Button)(({theme}) => ({
   color: theme?.components?.questionOption?.fontColor || theme.palette.primary.contrastText,
   fontSize: theme.typography[theme?.components?.questionOption?.fontSize]?.fontSize || theme.typography.body1.fontSize,
   backgroundColor: theme?.components?.questionOption?.color || theme.palette.primary.main,
+  '&:hover': {
+    backgroundColor: theme?.components?.questionOption?.hoverColor || theme.palette.primary.dark
+  }
 }));
 
 const QuestionDescription = styled(Typography)(({theme}) => ({
